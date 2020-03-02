@@ -10,5 +10,5 @@ diveRpine
 
 
 <p align="center">
-<img src="https://www.bibliometrix.org/logo.png" width="300"  />
+<img src="img/diveRpineLogo.png" width="300"  />
 </p>
