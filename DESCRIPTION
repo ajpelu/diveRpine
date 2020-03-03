@@ -1,16 +1,22 @@
 Package: diveRpine
 Type: Package
 Title: Diversification of Pine Plantations
+Date: 2020
 Version: 1.0.0
-Authors@R: c(person("Antonio J.", "Pérez-Luque", email = "ajperez@ugr.es", 
-    role = c("cre", "aut")), 
-    person("Regino", "Zamora", email = "rzamora@ugr.es",
-    role = c("ctb")))
+Authors@R: c(person("Antonio J.", "Pérez-Luque", 
+             email = "ajperez@ugr.es", 
+             role = c("cre", "aut"), 
+             comment = c(ORCID = "0000-0002-1747-0469")),
+             person("Regino", "Zamora", 
+             email = "rzamora@ugr.es",
+             role = c("ctb"), 
+             comment = c(ORCID = "0000-0002-5049-9968")))
 Maintainer: Antonio J. Pérez-Luque <ajperez@ugr.es>
 Description: Tool for analyze how different forest-management actions modify 
     the biodiversity-related ecosystem services in Mediterranean mountain 
     pine plantationsUse.
 License: GPL-3 + file LICENSE
+BugReports: https://github.com/ajpelu/diveRpine/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.1

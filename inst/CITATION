@@ -1,0 +1,12 @@
+citHeader("To cite diveRpine or acknowledge its use, please cite:")
+
+citEntry(
+    entry = "Article",
+    title = {"diveRpine: diversification of pine plantations in Mediterranean mountains"},
+    author = personList(as.person("Antonio J. Pérez-Luque"),
+        as.person("Regino Zamora")),
+    journal = {"Ecosystem Services"},
+    volume = {""},
+    year = {""},
+    pages = {""},
+    textVersion  = "Pérez-Luque AJ and Zamora R. (Submitted). diveRpine: diversification of pine plantations in Mediterranean mountains. Ecosystem Services ")
