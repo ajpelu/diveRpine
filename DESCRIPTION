@@ -22,4 +22,6 @@ Imports:
     methods,
     sp,
     Rdpack
+Suggests: 
+    pkgdown
 RdMacros: Rdpack

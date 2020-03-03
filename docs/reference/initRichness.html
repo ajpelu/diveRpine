@@ -8,6 +8,13 @@
 
 <title>Set values of Initial Richness — initRichness • diveRpine</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,6 +44,7 @@
 
 <meta property="og:title" content="Set values of Initial Richness — initRichness" />
 <meta property="og:description" content="This function computes the initial values of richness values for each patch." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,7 +136,8 @@ target patch to natural forest patchs</p></td>
       <td><p>A <code>data frame</code> with three columns: <code>value</code> of land use
 (<code>integer</code>: 0 = "Other", 1 = "Pine plantation", 2 = "Natural Forests",
 3 = "Crop"); <code>lowRich</code> and <code>upRich</code> (lower and upper value of the
-range of Richness: See Gómez-Aparicio et al. 2009)</p></td>
+range of Richness)(see Gómez-Aparicio et al. 2009)
+.</p></td>
     </tr>
     <tr>
       <th>treedensity</th>
@@ -164,26 +173,31 @@ of possible values found on the study area. In this case we use data from
 Sierra Nevada (southern Spain) See References.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Gómez-Aparicio L, Zavala MA, Bonet FJ, Zamora R (2009). Are pine plantations
-valid tools for restoring Mediterranean forests? An assessment along abiotic
-and biotic gradients. Ecological Applications, 19: 2124 - 2141.
-<a href='https://doi.org/10.1890/08-1656.1'>10.1890/08-1656.1</a></p>
-<p>Mendoza I, Gómez-Aparicio L, Zamora R, Matías L (2009). Recruitment
-limitation of forest communities in a degraded Mediterranean landscape.
-Journal of Vegetation Science 20: 367 – 376.
-<a href='https://doi.org/10.1111/j.1654-1103.2009.05705.x'>10.1111/j.1654-1103.2009.05705.x</a></p>
-<p>González-Moreno P, Quero JL, Poorter L, Bonet FJ, Zamora R (2011). Is spatial
-structure the key to promote plant diversity in Mediterranean forest
-plantations? Basic and Applied Ecology 12: 251 – 259.
-<a href='https://doi.org/10.1016/j.baae.2011.02.012'>10.1016/j.baae.2011.02.012</a></p>
-<p>Navarro-González I, Pérez-Luque AJ, Bonet FJ, Zamora R (2013). The weight of
-the past: land-use legacies and recolonization of pine plantations by oak
-trees. Ecological Applications 23: 1267 – 1276.
-<a href='https://doi.org/10.1890/12-0459.1'>10.1890/12-0459.1</a></p>
-<p>Pérez-Luque AJ, Bonet FJ, Pérez-Pérez R, Aspizua R, Lorite J, Zamora R
-(2014). Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests
-(SE Spain). PhytoKeys 35: 1 – 15.
-<a href='https://doi.org/10.3897/phytokeys.35.6363'>10.3897/phytokeys.35.6363</a></p>
+    <p>Gómez-Aparicio L, Zavala MA, Bonet FJ, Zamora R (2009).
+&#8220;Are pine plantations valid tools for restoring Mediterranean forests? An assessment along abiotic and biotic gradients.&#8221;
+<em>Ecological Applications</em>, <b>19</b>(8), 2124--2141.
+doi: <a href='https://doi.org/10.1890/08-1656.1'>10.1890/08-1656.1</a>
+.</p>
+<p>Mendoza I, Gómez-Aparicio L, Zamora R, Matías L (2009).
+&#8220;Recruitment limitation of forest communities in a degraded Mediterranean landscape.&#8221;
+<em>Journal of Vegetation Science</em>, <b>20</b>(2), 367--376.
+doi: <a href='https://doi.org/10.1111/j.1654-1103.2009.05705.x'>10.1111/j.1654-1103.2009.05705.x</a>
+.</p>
+<p>González-Moreno P, Quero J, Poorter L, Bonet F, Zamora R (2011).
+&#8220;Is spatial structure the key to promote plant diversity in Mediterranean forest plantations?&#8221;
+<em>Basic and Applied Ecology</em>, <b>12</b>(3), 251--259.
+doi: <a href='https://doi.org/10.1016/j.baae.2011.02.012'>10.1016/j.baae.2011.02.012</a>
+.</p>
+<p>Navarro-González I, Pérez-Luque AJ, Bonet FJ, Zamora R (2013).
+&#8220;The weight of the past: land-use legacies and recolonization of pine plantations by oak trees.&#8221;
+<em>Ecological Applications</em>, <b>23</b>(6), 1267--1276.
+doi: <a href='https://doi.org/10.1890/12-0459.1'>10.1890/12-0459.1</a>
+.</p>
+<p>Pérez-Luque AJ, Bonet FJ, Pérez-Pérez R, Aspizua R, Lorite J, Zamora R (2014).
+&#8220;Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests (SE Spain).&#8221;
+<em>PhytoKeys</em>, <b>35</b>, 1--15.
+doi: <a href='https://doi.org/10.3897/phytokeys.35.6363'>10.3897/phytokeys.35.6363</a>
+.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

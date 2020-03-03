@@ -1,8 +1,4 @@
-# `diveRpine` 
-
-<p align="rigth">
-<img src="man/figures/logo.png" width="300"  />
-</p>
+# diveRpine <img src="man/figures/logo.png" align="right" width="240"/>
 
 <br>
 <br>
