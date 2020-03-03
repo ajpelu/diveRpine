@@ -1,7 +1,7 @@
 # `diveRpine` 
 
 <p align="rigth">
-<img src="inst/logos/diveRpineLogo.png" width="300"  />
+<img src="man/figures/logo.png" width="300"  />
 </p>
 
 <br>
