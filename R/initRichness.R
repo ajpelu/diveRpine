@@ -10,7 +10,7 @@
 #' @param r_range A \code{data frame} with three columns: \code{value} of land use
 #' (\code{integer}: 0 = "Other", 1 = "Pine plantation", 2 = "Natural Forests",
 #' 3 = "Crop"); \code{lowRich} and \code{upRich} (lower and upper value of the
-#' range of Richness: See Gómez-Aparicio et al. 2009)
+#' range of Richness)\insertCite{@see @GomezAparicio2009}{diveRpine}.
 #'
 #' @param treedensity density of the pine plantation (\code{integer})
 #'
@@ -36,34 +36,19 @@
 #' Sierra Nevada (southern Spain) See References.
 #'
 #' @references
+#' \insertRef{GomezAparicio2009}{diveRpine}
 #'
-#' Gómez-Aparicio L, Zavala MA, Bonet FJ, Zamora R (2009). Are pine plantations
-#' valid tools for restoring Mediterranean forests? An assessment along abiotic
-#' and biotic gradients. Ecological Applications, 19: 2124 - 2141.
-#' \href{https://doi.org/10.1890/08-1656.1}{10.1890/08-1656.1}
+#' \insertRef{Mendoza2009}{diveRpine}
 #'
-#' Mendoza I, Gómez-Aparicio L, Zamora R, Matías L (2009). Recruitment
-#' limitation of forest communities in a degraded Mediterranean landscape.
-#' Journal of Vegetation Science 20: 367 – 376.
-#' \href{https://doi.org/10.1111/j.1654-1103.2009.05705.x}{10.1111/j.1654-1103.2009.05705.x}
+#' \insertRef{GonzalezMoreno2011}{diveRpine}
 #'
-#' González-Moreno P, Quero JL, Poorter L, Bonet FJ, Zamora R (2011). Is spatial
-#' structure the key to promote plant diversity in Mediterranean forest
-#' plantations? Basic and Applied Ecology 12: 251 – 259.
-#' \href{https://doi.org/10.1016/j.baae.2011.02.012}{10.1016/j.baae.2011.02.012}
+#' \insertRef{NavarroGonzalez2013}{diveRpine}
 #'
-#' Navarro-González I, Pérez-Luque AJ, Bonet FJ, Zamora R (2013). The weight of
-#' the past: land-use legacies and recolonization of pine plantations by oak
-#' trees. Ecological Applications 23: 1267 – 1276.
-#' \href{https://doi.org/10.1890/12-0459.1}{10.1890/12-0459.1}
+#' \insertRef{PerezLuque2014}{diveRpine}
 #'
-#' Pérez-Luque AJ, Bonet FJ, Pérez-Pérez R, Aspizua R, Lorite J, Zamora R
-#' (2014). Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests
-#' (SE Spain). PhytoKeys 35: 1 – 15.
-#' \href{https://doi.org/10.3897/phytokeys.35.6363}{10.3897/phytokeys.35.6363}
-
 #' @import raster
 #' @importFrom stats runif
+#' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 
 initRichness <- function(r, draster, r_range, treedensity, pastUse, rescale=TRUE){

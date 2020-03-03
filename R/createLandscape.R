@@ -31,21 +31,16 @@
 #' according to the remaining space. Finally, remain pixels are assigned to
 #' the shrubland category. The size and proportion of the each patch classes
 #' range according to distribution of those ecosystem in Sierra Nevada (SE
-#' Spain) (see Pérez-Luque et al. 2014; 2019)
+#' Spain) \insertCite{@see @PerezLuque2014 and @PerezLuque2019}{diveRpine}
 #'
 #' @references
+#' \insertRef{PerezLuque2014}{diveRpine}
 #'
-#' Pérez-Luque AJ, Bonet FJ, Pérez-Pérez R, Aspizua R, Lorite J, Zamora R
-#' (2014). Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests
-#' (SE Spain). PhytoKeys 35: 1 – 15.
-#' \href{https://doi.org/10.3897/phytokeys.35.6363}{10.3897/phytokeys.35.6363}
-#'
-#' Pérez-Luque AJ, Bonet FJ, Zamora R (2019). Map of ecosystems types in Sierra
-#' Nevada mountain (southern Spain).
-#' \url{https://doi.pangaea.de/10.1594/PANGAEA.910176}
+#' \insertRef{PerezLuque2019}{diveRpine}
 #'
 #' @import raster
 #' @import landscapeR
+#' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 
 

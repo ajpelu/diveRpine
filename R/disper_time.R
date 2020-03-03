@@ -9,7 +9,7 @@
 #' distance to the seed source and quantity and typology of vegetation patches;
 #' and on the composition of the dispersal community. Data about amount of seed
 #' introduced into pine plantation in Sierra Nevada mountain (SE Spain) comes
-#' from Zamora et al. (2010). See references.
+#' from \insertCite{@ @Zamora2010}{diveRpine}.
 #'
 #' @param x A \code{raster} object with the landscape configured
 #'
@@ -34,22 +34,19 @@
 #' @param per_ma Percentage of mammals dispersers
 #'
 #' @param propaguleInputBird Propagule input by birds (seeds number by year and
-#' square meter; see Zamora et al. 2010)
+#' square meter) \insertCite{@see @Zamora2010}{diveRpine}
 #'
 #' @param propaguleInputMammal Propagule input by mammals (seeds number by year and
-#' square meter; see Zamora et al. 2010)
-#'
+#' square meter) \insertCite{@see @Zamora2010}{diveRpine}
 #'
 #' @param time_span Numbers of year simulated (maximum 50)
 #'
 #' @references
-#' Zamora R, Hódar JA, Matías L, Mendoza I. (2010). Positive adjacency effects
-#' mediated by seed disperser birds in pine plantations. Ecological Applications
-#' 20: 1053 – 1060.
-#' \href{https://doi.org/10.1890/09-0055.1}{10.1890/09-0055.1}
+#' \insertRef{Zamora2010}{diveRpine}
 #'
 #' @import raster
 #' @import rgeos
+#' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 
 disper_time <- function(msb, mmb, mma, x, xr, pp_value, per_sb,

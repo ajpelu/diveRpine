@@ -2,9 +2,9 @@ Package: diveRpine
 Type: Package
 Title: Diversification of Pine Plantations
 Version: 1.0.0
-Authors@R: c(person("Pérez-Luque", "Antonio J.", email = "ajperez@ugr.es", 
+Authors@R: c(person("Antonio J.", "Pérez-Luque", email = "ajperez@ugr.es", 
     role = c("cre", "aut")), 
-    person("Zamora", "Regino", email = "rzamora@ugr.es",
+    person("Regino", "Zamora", email = "rzamora@ugr.es",
     role = c("ctb")))
 Maintainer: Antonio J. Pérez-Luque <ajperez@ugr.es>
 Description: Tool for analyze how different forest-management actions modify 
@@ -20,4 +20,6 @@ Imports:
     rgeos,
     stats,
     methods,
-    sp
+    sp,
+    Rdpack
+RdMacros: Rdpack
