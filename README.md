@@ -17,5 +17,5 @@ diveRpine
 
 
 <p align="center">
-<img src="img/diveRpineLogo.png" width="300"  />
+<img src="inst/logos/diveRpineLogo.png" width="300"  />
 </p>
