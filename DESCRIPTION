@@ -9,7 +9,7 @@ Authors@R: c(person("Antonio J.", "Pérez-Luque",
              comment = c(ORCID = "0000-0002-1747-0469")),
              person("Regino", "Zamora", 
              email = "rzamora@ugr.es",
-             role = c("ctb"), 
+             role = c("ctb", "aut"), 
              comment = c(ORCID = "0000-0002-5049-9968")))
 Maintainer: Antonio J. Pérez-Luque <ajperez@ugr.es>
 Description: Tool for analyze how different forest-management actions modify 
