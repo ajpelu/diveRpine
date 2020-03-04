@@ -54,4 +54,3 @@ All required code can be found in this github repositroy.
 
   - repostatus.org
   - rstudio.mirror downloads
-  - cran version
