@@ -34,7 +34,7 @@ visualize different scenarios and perform simulations based on solid
 field data interpreted in scientific contexts.
 
 <br>See a running example
-[here](http://vlab.iecolab.es/ajpelu/respine/respineappv2/).
+[here](http://vlab.iecolab.es/ajpelu/diveRpine_app/).
 
 ## Installation
 

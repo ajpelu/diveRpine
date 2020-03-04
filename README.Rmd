@@ -30,7 +30,7 @@ The application projects the most likely ecological succession in each stand bas
 <br>
 This tool uses information published in scientific journals in a synthetic and straightforward way, enabling the manager to visualize different scenarios and perform simulations based on solid field data interpreted in scientific contexts.
 
-<br>See a running example [here](http://vlab.iecolab.es/ajpelu/respine/respineappv2/).
+<br>See a running example [here](http://vlab.iecolab.es/ajpelu/diveRpine_app/).
 
 ## Installation
 diveRpine was built in [R](https://www.r-project.org), an open source programming language using the [Shiny package](https://shiny.rstudio.com), a web application framework for R. 

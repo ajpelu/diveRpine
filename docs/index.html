@@ -55,8 +55,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/ajpelu/diveRpine">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -72,23 +82,23 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#diverpine-" class="anchor"></a>diveRpine <img src="reference/figures/logo.png" align="right" width="240">
 </h1></div>
-<p><br><br> diveRpine (<strong>dive</strong>rsification of <strong>pine</strong> plantations in Mediterranean mountains) is an interactive <strong>R</strong> tool to help forest-decision makers, which simulates the way in which species diversity in pine plantations varies depending on the landscape configuration, the internal structure of the plantation (<em>e.g.</em> past land uses, tree density), and the composition of the dispersion vectors (<em>e.g.</em> birds, mammals). <br><br> The aim of the application is to develop a decision-support tool that simulates the dynamics of forest ecological processes. The application projects the most likely ecological succession in each stand based on the ecological context, and visualizes the relative importance of the different ecological mechanisms involved in the process. The resulting simulations help the manager to identify forest stands that most need intervention (active restoration), compared to other stands where intervention is unneeded (passive restoration), depending on the ecosystem services that the manager wishes to maximize. It also allows the user to visualize some of the complex ecological processes that underlie the diversification of pine plantations in Mediterranean mountain areas.</p>
-<p>This tool uses information published in scientific journals in a synthetic and straightforward way, enabling the manager to visualize different scenarios and perform simulations based on solid field data interpreted in scientific contexts.</p>
-<p>See a running example here.</p>
-<div id="prerequisites-for-using-diverpine" class="section level2">
+<div id="diversification-of-pine-plantations-in-mediterranean-mountains" class="section level2">
 <h2 class="hasAnchor">
-<a href="#prerequisites-for-using-diverpine" class="anchor"></a>Prerequisites for using diveRpine</h2>
-<p>diveRpine was built in <a href="https://www.r-project.org">R</a>, an open source programming language using the <a href="https://shiny.rstudio.com">Shiny package</a>, a web application framework for R.</p>
-<p>Users will need to download <a href="https://cran.uni-muenster.de/">R</a> in order to use diveRpine and we suggest the use of <a href="https://www.rstudio.com">RStudio</a>.</p>
+<a href="#diversification-of-pine-plantations-in-mediterranean-mountains" class="anchor"></a><strong>dive</strong>rsification of <strong>pine</strong> plantations in Mediterranean mountains</h2>
+<!-- badges: start -->
+
+<p>diveRpine is an interactive <strong>R</strong> tool which simulates the way in which species diversity in pine plantations varies depending on the landscape configuration, the internal structure of the plantation (<em>e.g.</em> past land uses, tree density), and the composition of the dispersion vectors (<em>e.g.</em> birds, mammals).</p>
+<p><br> The aim of the application is to develop a decision-support tool that simulates the dynamics of forest ecological processes. <br> The application projects the most likely ecological succession in each stand based on the ecological context, and visualizes the relative importance of the different ecological mechanisms involved in the process. The resulting simulations help the manager to identify forest stands that most need intervention (active restoration), compared to other stands where intervention is unneeded (passive restoration), depending on the ecosystem services that the manager wishes to maximize. It also allows the user to visualize some of the complex ecological processes that underlie the diversification of pine plantations in Mediterranean mountain areas. <br> This tool uses information published in scientific journals in a synthetic and straightforward way, enabling the manager to visualize different scenarios and perform simulations based on solid field data interpreted in scientific contexts.</p>
+<p><br>See a running example <a href="http://vlab.iecolab.es/ajpelu/respine/respineappv2/">here</a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(devtools)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"ajpelu/diveRpine"</span>)</span></code></pre></div>
+<p>diveRpine was built in <a href="https://www.r-project.org">R</a>, an open source programming language using the <a href="https://shiny.rstudio.com">Shiny package</a>, a web application framework for R.</p>
+<p>You can download the development version of diveRpine from <a href="https://github.com/ajpelu/diveRpine">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"ajpelu/diveRpine"</span>)</span></code></pre></div>
 <p>All required code can be found in this github repositroy.</p>
-<!-- badges: start -->
-
 <ul>
 <li>repostatus.org</li>
 <li>rstudio.mirror downloads</li>
@@ -102,6 +112,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/ajpelu/diveRpine">https://​github.com/​ajpelu/​diveRpine</a>
+</li>
 <li>Report a bug at <br><a href="https://github.com/ajpelu/diveRpine/issues">https://​github.com/​ajpelu/​diveRpine/​issues</a>
 </li>
 </ul>
@@ -131,7 +143,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/ajpelu/diveRpine"><img src="https://travis-ci.org/ajpelu/diveRpine.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 </ul>
 </div>
 </div>
