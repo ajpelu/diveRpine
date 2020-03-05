@@ -24,6 +24,31 @@ shinyServer(
   function(input, output, session){
 
     ### ----------------------------------------------
+    # Show introduction text (Intro modal)
+    observeEvent("", {
+      showModal(modalDialog(
+        includeHTML("intro_text.html"),
+        easyClose = TRUE,
+        footer = tagList(
+          actionButton(inputId = "intro", label = "Introduction Tour", icon = icon("info-circle"))
+        )
+      ))
+    })
+
+    observeEvent(input$intro,{
+      removeModal()
+    })
+
+    # Show tour
+    observeEvent(input$intro,
+                 introjs(session,
+                         options = list("nextLabel" = "Continue",
+                                        "prevLabel" = "Previous",
+                                        "doneLabel" = "Done"))
+    )
+
+
+    ### ----------------------------------------------
     # Density
     den_pp <- reactive ({
       list(
@@ -158,9 +183,11 @@ shinyServer(
 
     observeEvent(input$doPaisaje, {
       output$plotMaps <- renderUI({
+        introBox(data.step = 4, data.intro = "Map",
+
         withSpinner(
           plotOutput("initial_map", height = h_plots),
-        type=spinnerType, size=spinnerSize)
+        type=spinnerType, size=spinnerSize))
       })
 
       output$initial_map <- renderPlot({

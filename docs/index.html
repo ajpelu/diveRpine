@@ -89,7 +89,6 @@
 
 <p>diveRpine is an interactive <strong>R</strong> tool which simulates the way in which species diversity in pine plantations varies depending on the landscape configuration, the internal structure of the plantation (<em>e.g.</em> past land uses, tree density), and the composition of the dispersion vectors (<em>e.g.</em> birds, mammals).</p>
 <p><br> The aim of the application is to develop a decision-support tool that simulates the dynamics of forest ecological processes. <br> The application projects the most likely ecological succession in each stand based on the ecological context, and visualizes the relative importance of the different ecological mechanisms involved in the process. The resulting simulations help the manager to identify forest stands that most need intervention (active restoration), compared to other stands where intervention is unneeded (passive restoration), depending on the ecosystem services that the manager wishes to maximize. It also allows the user to visualize some of the complex ecological processes that underlie the diversification of pine plantations in Mediterranean mountain areas. <br> This tool uses information published in scientific journals in a synthetic and straightforward way, enabling the manager to visualize different scenarios and perform simulations based on solid field data interpreted in scientific contexts.</p>
-<p><br>See a running example <a href="http://vlab.iecolab.es/ajpelu/diveRpine_app/">here</a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -98,11 +97,27 @@
 <p>You can download the development version of diveRpine from <a href="https://github.com/ajpelu/diveRpine">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"ajpelu/diveRpine"</span>)</span></code></pre></div>
-<p>All required code can be found in this github repositroy.</p>
-<ul>
-<li>repostatus.org</li>
-<li>rstudio.mirror downloads</li>
-</ul>
+</div>
+<div id="how-to-run-diverpine" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-run-diverpine" class="anchor"></a>How to run diveRpine</h2>
+<p>The recommended option to use the application is to download the package and run it locally. You can also use a running example <a href="http://vlab.iecolab.es/ajpelu/diveRpine_app/">here</a>.</p>
+<div id="locally" class="section level3">
+<h3 class="hasAnchor">
+<a href="#locally" class="anchor"></a>Locally</h3>
+<ol>
+<li><p>The use of Rstudio is recommended</p></li>
+<li><p>Download and install the <code>diveRpine</code> pkg using:</p></li>
+</ol>
+<!-- end list --><div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"ajpelu/diveRpine"</span>)</span></code></pre></div>
+<ol>
+<li>Run the app:</li>
+</ol>
+<!-- end list --><div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"diveRpine"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="https://rdrr.io/pkg/diveRpine/man/run_diveRpine.html">run_diveRpine</a></span>()</span></code></pre></div>
+<p>All required code can be found in this <a href="https://github.com/ajpelu/diveRpine">github repositroy</a>.</p>
+</div>
 </div>
 </div>
   </div>
@@ -133,8 +148,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Antonio J. Pérez-Luque <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-1747-0469" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
-<li>Regino Zamora <br><small class="roles"> Contributor, author </small> <a href="https://orcid.org/0000-0002-5049-9968" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Antonio J. Pérez-Luque <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1747-0469" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -151,7 +166,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Antonio J. Pérez-Luque, Regino Zamora.</p>
+  <p>Developed by Antonio J. Pérez-Luque.</p>
 </div>
 
 <div class="pkgdown">

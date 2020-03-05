@@ -38,9 +38,6 @@ journals in a synthetic and straightforward way, enabling the manager to
 visualize different scenarios and perform simulations based on solid
 field data interpreted in scientific contexts.
 
-<br>See a running example
-[here](http://vlab.iecolab.es/ajpelu/diveRpine_app/).
-
 ## Installation
 
 diveRpine was built in [R](https://www.r-project.org), an open source
@@ -55,7 +52,33 @@ You can download the development version of diveRpine from
 devtools::install_github("ajpelu/diveRpine")
 ```
 
-All required code can be found in this github repositroy.
+## How to run diveRpine
 
-  - repostatus.org
-  - rstudio.mirror downloads
+The recommended option to use the application is to download the package
+and run it locally. You can also use a running example
+[here](http://vlab.iecolab.es/ajpelu/diveRpine_app/).
+
+### Locally
+
+1.  The use of Rstudio is recommended
+
+2.  Download and install the `diveRpine` pkg using:
+
+<!-- end list -->
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ajpelu/diveRpine")
+```
+
+3.  Run the app:
+
+<!-- end list -->
+
+``` r
+library("diveRpine")
+run_diveRpine()
+```
+
+All required code can be found in this [github
+repositroy](https://github.com/ajpelu/diveRpine).
