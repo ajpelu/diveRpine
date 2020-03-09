@@ -31,7 +31,8 @@ Imports:
     magrittr
 Suggests: 
     pkgdown,
-    spelling
+    spelling,
+    rmarkdown
 RdMacros: Rdpack
 URL: https://github.com/ajpelu/diveRpine
 Language: en-US
