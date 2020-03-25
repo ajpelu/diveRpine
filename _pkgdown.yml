@@ -1,1 +1,6 @@
 destination: docs
+
+template:
+  params:
+    bootswatch: yeti
+    ganalytics: UA-161864428-1
