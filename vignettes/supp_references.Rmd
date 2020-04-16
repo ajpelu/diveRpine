@@ -9,7 +9,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Supporting References 
 
 `diveRpine` was built using results and information from scientific papers published in scientific journals. Most of the papers deal with the naturalization of pine plantation forests in Sierra Nevdada mountain (Southern Spain), although other references were also used. To get detailed information about see the documentation of functions created for `diveRpine`. Here 
 there is a list of the references used: 
@@ -30,9 +29,9 @@ there is a list of the references used:
 
 - Navarro-González, I., Pérez-Luque, A. J., Bonet, F. J., & Zamora, R. (2013). The weight of the past: land-use legacies and recolonization of pine plantations by oak trees. Ecological Applications, 23(6), 1267–1276. doi: [10.1890/12-0459.1](https://dx.doi.org/10.1890/12-0459.1)
 
-- Pérez-Luque, Antonio Jesús, Bonet, F. J., Pérez-Pérez, R., Aspizua, R., Lorite, J., & Zamora, R. (2014). Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests (SE Spain). PhytoKeys, 35, 1–15. doi: [10.3897/phytokeys.35.6363](https://dx.doi.org/10.3897/phytokeys.35.6363)
+- Pérez-Luque, A. J., Bonet, F. J., Pérez-Pérez, R., Aspizua, R., Lorite, J., & Zamora, R. (2014). Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests (SE Spain). PhytoKeys, 35, 1–15. doi: [10.3897/phytokeys.35.6363](https://dx.doi.org/10.3897/phytokeys.35.6363)
 
-- Pérez-Luque, Antonio Jesus, Bonet-García, F. J., & Zamora Rodríguez, R. (2019). Map of ecosystems types in Sierra Nevada mountain (southern Spain). doi: [10.1594/PANGAEA.910176](https://doi.pangaea.de/10.1594/PANGAEA.910176)
+- Pérez-Luque, A. J., Bonet-García, F. J., & Zamora Rodríguez, R. (2019). Map of ecosystems types in Sierra Nevada mountain (southern Spain). doi: [10.1594/PANGAEA.910176](https://doi.pangaea.de/10.1594/PANGAEA.910176)
 
 - Pons, J., & Pausas, J. G. (2007). Acorn dispersal estimated by radio-tracking. Oecologia, 153(4), 903–911. doi: [10.1007/s00442-007-0788-x](https://dx.doi.org/10.1007/s00442-007-0788-x)
 
