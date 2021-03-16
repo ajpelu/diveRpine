@@ -1,5 +1,12 @@
 ---
 title: "Supporting references"
+description: >
+  Learn how to get started with the basics of pkgdown.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Supporting references}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
