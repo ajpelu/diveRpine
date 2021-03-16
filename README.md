@@ -8,7 +8,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -65,16 +65,12 @@ and run it locally. You can also use a running example
 
 2.  Download and install the `diveRpine` pkg using:
 
-<!-- end list -->
-
 ``` r
 # install.packages("devtools")
 devtools::install_github("ajpelu/diveRpine")
 ```
 
-3.  Run the app:
-
-<!-- end list -->
+1.  Run the app:
 
 ``` r
 library("diveRpine")
@@ -82,4 +78,4 @@ run_diveRpine()
 ```
 
 All required code can be found in this [github
-repositroy](https://github.com/ajpelu/diveRpine).
+repository](https://github.com/ajpelu/diveRpine).
