@@ -1,29 +1,28 @@
+library("DT")
+library("landscapeR")
+library("raster")
+library("rasterVis")
+library("RColorBrewer")
+library('rgeos')
+library('rintrojs')
+library('knitr')
+library('markdown')
+library('sp')
+library("sf")
 library('shiny')
 library('shinythemes')
 library('shinycssloaders')
 library('shinydashboard')
-library('shinyWidgets')
-library('knitr')
-library('markdown')
-library('raster')
-library('landscapeR')
-library('rasterVis')
-library('RColorBrewer')
-library('sp')
-library('rgeos')
-library('rintrojs')
 library('shinyjs')
+library('shinyWidgets')
+library("tidyverse")
 
 # Set heigth plots
-h_plots <- 800
+h_plots <- 700
 
-
-sidebar <- dashboardSidebar(disable=TRUE)
-
-# Header --------------------------------------------------------------------
-
+## Header ---------------------------------------------------------------
 header <- dashboardHeader(
-  title = span(img(src = "diveRpine_v1.svg", height = 35), "diveRpine"),
+  title = span(img(src = "diveRpine_v1.svg", height = '50'), "diveRpine_dev"),
   tags$li(
     a(
       strong("About diveRpine"),
@@ -36,125 +35,141 @@ header <- dashboardHeader(
   )
 )
 
-# Body --------------------------------------------------------------------
+## Sidebar ---------------------------------------------------------------
+sidebar <- dashboardSidebar(disable = TRUE)
+
+## Body ---------------------------------------------------------------
 body <- dashboardBody(
 
   # Intro
   useShinyjs(),
   introjsUI(),
 
-  # Main body -------------------------------------------------------------
   fluidRow(
     column(width = 5,
-      fluidRow(
+           fluidRow(
+             setSliderColor(c(rep("#5DB85C", 7)), c(1:7)), # change color sliders
 
-        setSliderColor(c(rep("#28b78d", 6)), c(1:6)),
+             box(
+               introBox(
+               tags$p(h4(strong("Pine plantation"))),
+               sliderInput( # Size of pine plantation
+                 inputId = "pp_size", label = "Patch Area",
+                 min = 200, max = 1500, value = 750
+               ),
+               awesomeRadio(
+                 inputId = "pp_den", label = "Tree density",
+                 choices = c("low", "medium", "high"),
+                 selected = "medium", status = "success", inline = TRUE
+               ),
+               awesomeRadio(
+                 inputId = "pp_use", label = "Past Land-use of the pine plantation",
+                 choices = c("Natural Forests", "Shrublands", "Pasture", "Croplands"),
+                 selected = "Shrublands", status = "success"
+               ),
+               data.step = 1,
+               data.intro = "Configure the stand features of the focal pine plantation: <ul> <li>Set the <b>patch size</b></li> <li>Specify the <b>tree density</b> <li>Select the <b>past land-use</b></li> </ul>"
+               ),
 
-        box(
-          introBox(
-            tags$p(h4(strong("Pine plantation"))),
-            sliderInput(inputId = "size_pp", label = "Patch Area",
-                      min = 200, max = 1500, value = 750),
-            selectInput(inputId = "density_pp", label = "Tree density",
-                      choices = c('low', 'medium', 'high'), selected = 'medium'),
-            selectInput(inputId = "pp_pastUse", label = "Past Land Use",
-                      choices = c('Natural Forests', 'Shrublands', 'Pasture', 'Croplands'), selected = 'Shrublands'),
-            data.step = 1,
-            data.intro = "Configure the stand features of the focal pine plantation: <ul> <li>Set the <b>patch size</b></li> <li>Specify the <b>tree density</b> <li>Select the <b>past land-use</b></li> </ul>"
-            ),
-          introBox(
-          tags$p(h4(strong("Natural Forests"))),
-          sliderInput(inputId = "n_nf",label = "Patch numbers", min = 1, max= 5, value =2),
-          sliderInput(inputId = "size_nf", label = "Patch size", min = 50, max = 500, value = 250),
-          data.step = 2,
-          data.intro = "Configure the <b>landscape</b>. Specify the number and size of <b>natural forests</b>"
-          ),
-          introBox(
-          actionBttn(
-            inputId = "doPaisaje",
-            label = "Create Landscape",
-            color = "success",
-            style = "material-flat",
-            size = "xs"
-          ),
-          data.step = 3,
-          data.intro = "Click the button <b>Create Landscape</b> to plot the configurated landscape."
-          ),
+               introBox(
+               tags$p(h4(strong("Natural Forests"))), # Natural forest configuration
+               sliderInput(
+                 inputId = "nf_n", label = "Natural forests patch number",
+                 min = 1, max = 5, value = 2
+               ),
+               sliderInput(
+                 inputId = "nf_size",
+                 label = HTML(paste0("Natural forests patch size", br(), "(min and max)")),
+                 min = 50, max = 500, value = c(100, 200)
+               ),
+               data.step = 2,
+               data.intro = "Configure the <b>landscape</b>. Specify the number and size of <b>natural forests</b>"
+               ),
 
-          tags$br(),
-          tags$br(),
+               introBox(
+               tags$br(),
+               actionBttn(
+                 inputId = "createLandscape",
+                 label = "Create Landscape",
+                 color = "success",
+                 style = "material-flat",
+                 size = "xs"
+               ),
+               data.step = 3,
+               data.intro = "Click the button <b>Create Landscape</b> to plot the configurated landscape."
+               ),
 
-          introBox(
-          actionBttn(
-            inputId = "doRiquezaInit",
-            label = "Compute Initial Richness",
-            color = "success",
-            style = "material-flat",
-            size = "xs"
-          ),
-          data.step = 4,
-          data.intro = "Click the button <b>Compute Initial Richness</b> to calculate the initial composition of the focal pine-stand and natural forests patches. <br> The results can be seen in the output map (rigth-side) and a summary in the boxes below"
-          )),
+               tags$br(),
+               tags$br(),
+
+               introBox(
+               actionBttn(
+                 inputId = "computeInitialRichness",
+                 label = "Compute Initial Richness",
+                 color = "success",
+                 style = "material-flat",
+                 size = "xs"
+               ),
+               data.step = 4,
+               data.intro = "Click the button <b>Compute Initial Richness</b> to calculate the initial composition of the focal pine-stand and natural forests patches. <br> The results can be seen in the output map (rigth-side) and a summary in the boxes below"
+               )),
+
+             box(
+               introBox(
+               tags$p(h4(strong("Dispersers"))),
+               sliderInput(inputId = "sb",label = "Small-size Birds",
+                           min = 0, max = 100, value = 0, step = 1),
+               uiOutput("mb"),
+               dataTableOutput("disptable"),
+               data.step = 5,
+               data.intro = "Configure the composition of the <b>dispersers community</b>. Select the percentage of medium and small-sized birds. The remaining will be assigned to the mammals category"
+               ),
+
+               tags$br(),
+               tags$br(),
+               introBox(
+               tags$p(h4(strong("Simulation"))),
+               sliderInput(inputId = "timeRange", label = "Simulation years:", min=10, max=50, value=30),
+               data.step = 7,
+               data.intro = "Specify the simulation time"),
 
 
-        box(
-          introBox(
-          tags$p(h4(strong("Dispersers"))),
-          sliderInput(inputId = "sb",label = "Small-size Birds",
-                      min = 0, max = 100, value = 0, step = 1),
-          uiOutput("mb"),
-          tableOutput("disptable"),
-          data.step = 5,
-          data.intro = "Configure the composition of the <b>dispersers community</b>. Select the percentage of medium and small-sized birds. The remaining will be assigned to the mammals category"),
+               introBox(
+               actionBttn(inputId = "createPropagule", label = "Input seed propagules",
+                          color = "success", style = "material-flat", size = "xs"),
+               data.step = 6,
+               data.intro = "Click the button to compute the <b>input seed propagules</b> into the focal pine-plantation"),
 
-          introBox(
-          tags$p(h4(strong("Simulation"))),
-          sliderInput("timeRange", "Simulation years:", min=10, max=50, value=30),
-          data.step = 7,
-          data.intro = "Specify the simulation time"),
+               tags$br(),
+               tags$br(),
+               introBox(
+               actionBttn(inputId = "computeEndRichness", label = "Compute Final Richness",
+                          color = "success", style = "material-flat", size = "xs"),
+               data.step = 8,
+               data.intro = "Click the button to compute the <b> Final Richness</b> of the focal pine-stand. <br> The results can be seen in the output map (rigth-side) and a summary in the boxes below."
+               )
+             )
+           ),
 
-          introBox(
-            actionBttn(
-            inputId = "doPropagulo",
-            label = "Input seed propagules",
-            color = "success",
-            style = "material-flat",
-            size = "xs"
-          ),
-          data.step = 6,
-          data.intro = "Click the button to compute the <b>input seed propagules</b> into the focal pine-plantation"),
-
-          tags$br(),
-          tags$br(),
-
-          introBox(
-          actionBttn(
-            inputId = "doRiquezaEnd",
-            label = "Compute Final Richness",
-            color = "success",
-            style = "material-flat",
-            size = "xs"),
-          data.step = 8,
-          data.intro = "Click the button to compute the <b> Final Richness</b> of the focal pine-stand. <br> The results can be seen in the output map (rigth-side) and a summary in the boxes below."
-          )
-          )
-      ),
-
-      fluidRow(
-        #box(width=4, "Initial Richness Pine"),
-        #box(width=4, "Initial Richness  Natural Forest"),
-        #box(width=4, "Final Richness Pine"),
-        infoBoxOutput("rich_ppInitBox"),
-        infoBoxOutput("rich_nfBox"),
-        infoBoxOutput("rich_ppEndBox")
-        )
-      ),
-    column(width = 7,
-           box(width = NULL,
-                 uiOutput('plotMaps'))
+           fluidRow(
+             box(
+               width = 12,
+               tags$p(h4(strong("Plant richness values by forest type"))),
+               infoBoxOutput("rich_ppInitBox"),
+               infoBoxOutput("rich_nfBox"),
+               infoBoxOutput("rich_ppEndBox")
+             )
            )
+    ),
+    column(width = 7,
+           fluidRow(
+             box(width = NULL,
+                 uiOutput('plotMaps')
+             ))
     )
   )
+)
 
-dashboardPage(header, sidebar, body, skin = 'green',
-              title = "diveRpine")
+dashboardPage(header, sidebar, body,
+              title = "diveRpine_dev",
+              skin = "green")
