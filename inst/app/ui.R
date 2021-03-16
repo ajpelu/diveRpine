@@ -22,7 +22,7 @@ h_plots <- 700
 
 ## Header ---------------------------------------------------------------
 header <- dashboardHeader(
-  title = span(img(src = "diveRpine_v1.svg", height = '50'), "diveRpine_dev"),
+  title = span(img(src = "diveRpine_v1.svg", height = '50'), "diveRpine v1.1.0"),
   tags$li(
     a(
       strong("About diveRpine"),
