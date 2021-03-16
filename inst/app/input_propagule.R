@@ -3,7 +3,7 @@
 #' Compute the propagule input into focal pine plantation.
 #'
 #' @param x A \code{raster} object with the landscape configured
-#'
+#
 #' @param pd A \code{raster stack} object with rasters from the potential
 #' dispersion. See \code{potential_dispersion} function.
 #'

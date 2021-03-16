@@ -3,6 +3,7 @@
 #' Plot the input propagules into the focal pine plantation
 #'
 #' @param x A \code{raster} object
+#' @param ... others arguments (from ggplot2)
 #'
 #' @return ggplot2 Object
 #'
@@ -13,7 +14,7 @@
 #'
 #' @export
 plot_propagule <- function(x,
-                          ...){
+                           ...){
   # derive ratio for plot, cells should be a square and axis equal in length
   if (raster::ncol(x) == raster::nrow(x)) {
     ratio <- 1
@@ -33,10 +34,10 @@ plot_propagule <- function(x,
       axis.title = ggplot2::element_blank(),
       legend.background = ggplot2::element_blank(),
       legend.key = ggplot2::element_rect(color = "black"),
-      legend.key.width = unit(2.5,"cm"),
+      legend.key.width = ggplot2::unit(2.5,"cm"),
       aspect.ratio = ratio,
       legend.position = "bottom",
-      legend.title = element_blank(),
+      legend.title = ggplot2::element_blank(),
       panel.border = ggplot2::element_rect(fill = NA,
                                            colour = "black", size = 1),
       plot.margin = ggplot2::margin(0, 0, 0, 0, "cm")

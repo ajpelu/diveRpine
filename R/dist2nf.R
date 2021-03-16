@@ -22,7 +22,7 @@ dist2nf <- function(x, nf_value){
   nf_edges <- rasterToPolygons(x, fun=function(x){x == nf_value}, dissolve = TRUE)
 
   # get distance between each cell(as points) and nf_edges
-  dd = gDistance(nf_edges, methods::as(x,"SpatialPoints"), byid=TRUE)
+  dd = rgeos::gDistance(nf_edges, methods::as(x,"SpatialPoints"), byid=TRUE)
 
   # Get minimun distance
   dist_r <- x

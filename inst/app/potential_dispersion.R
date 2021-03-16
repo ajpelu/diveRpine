@@ -101,12 +101,12 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
     names(d_nfi) <- paste0("nf", i)
 
     # --- Adjacency
-    intersectan <- st_intersects(sf::st_as_sf(nf_patches[i,]),
-                                 st_as_sf(pine), sparse = FALSE)
+    intersectan <- sf::st_intersects(sf::st_as_sf(nf_patches[i,]),
+                                 sf::st_as_sf(pine), sparse = FALSE)
     if(intersectan == TRUE){
-    length_inter  <- st_length(
-      st_intersection(sf::st_as_sf(nf_patches[i,]),
-                      st_as_sf(pine), sparse = FALSE))
+      length_inter  <- sf::st_length(
+        sf::st_intersection(sf::st_as_sf(nf_patches[i,]),
+                        sf::st_as_sf(pine), sparse = FALSE))
     } else {
       length_inter <- 0
     }

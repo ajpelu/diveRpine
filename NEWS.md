@@ -1,39 +1,33 @@
 # NEWS
 
-# 1.0.1 diveRpine
+# diveRpine 1.1.0 
+## General comments 
+- Remove functions createLandscape.R; disper.R; and disper_time.R
+- Put some functions as code snippets of the shiny app. 
+- Include new functions: `plot_landscape()`, `plot_progagule()`; `plot_richness()`, `potential_dispersion()`
+- Add error standards for the richness values of the pine plantation
+- Include new computation code for dispersion module. See potential_dispersion.R
+
+# diveRpine 1.0.1 
 ## General comments
-- Change name to diveRpine (diversification of pine plantation)
-- Improve documentation of all functioms
-- Add namespace of several functions, e.g.: `as()` to `methods::as()`
 
+* Change name to diveRpine (diversification of pine plantation)
+* Improve documentation of all functioms
+* Add namespace of several functions, e.g.: `as()` to `methods::as()`
 
-### initRichness.R
-- fix minor typo on code comments
+## Minor improvements and bug fixes
 
-### distper.R
-- Language traslation of some code comements
+* fix minor typo on code comments in initRichness.R
+* createLandscape.R:
+  
+  * remove code block commented ç
+  * improve code styling
+  * improve code comments
+  * change ratify factor levels
 
-### createLandscape.R
+* Improve function documentation
 
-- remove code block commented
+# diveRpine  1.0.0 
+## General comments
 
-`code r
- ## test geometry
-  # pol_pine <- rasterToPolygons(pp, fun=function(x){x==pp_value}, dissolve = TRUE)
-  # centroids <- as.data.frame(getSpPPolygonsLabptSlots(pol_pine))
-  # names(centroids) <- c('x', 'y')
-  # coordinates(centroids) <- ~x+y
-  # pun <- circles(centroids, d=round(sqrt(((size_pp-50))/pi)), lonlat = FALSE)
-  #
-  # pp <- crop(pp, pun@polygons)
-`
-
- - improve code styling
- - improve code comments
- - change ratify factor levels
-
- - Improve function documentation
-
- # 1.0.0 respineDocencia
- ## General comments
- - Release app for academic purposes
+* Release app for academic purposes (respineDocencia)

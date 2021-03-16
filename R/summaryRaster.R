@@ -14,7 +14,6 @@
 #'
 #' @export
 summaryRaster <- function(x) {
-  require(raster)
   mean <- round(raster::cellStats(x, stat="mean"), 2)
   min <- round(raster::cellStats(x, stat="min"), 2)
   max <- round(raster::cellStats(x, stat="max"), 2)

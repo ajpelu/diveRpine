@@ -3,6 +3,7 @@
 #' Plot the richness values for the landscape created by the user
 #'
 #' @param x A \code{raster} object
+#' @param ... others arguments (from ggplot2)
 #'
 #' @return ggplot2 Object
 #'
@@ -35,7 +36,7 @@ plot_richness <- function(x,
       axis.title = ggplot2::element_blank(),
       legend.background = ggplot2::element_blank(),
       legend.key = ggplot2::element_rect(color = "black"),
-      legend.key.width = unit(2.5,"cm"),
+      legend.key.width = ggplot2::unit(2.5,"cm"),
       aspect.ratio = ratio,
       legend.position = "bottom",
       panel.border = ggplot2::element_rect(fill = NA,

@@ -8,9 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Tool for analyze how different forest-management actions modify 
-    the biodiversity-related ecosystem services in Mediterranean mountain 
-    pine plantationsUse.
+Tool for analyze how different forest-management actions modify the biodiversity-related ecosystem services in Mediterranean mountain pine plantationsUse.
 }
 \seealso{
 Useful links:

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@
 <meta property="og:title" content="Set values of Initial Richness — initRichness" />
 <meta property="og:description" content="This function computes the initial values of richness values for each patch." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -73,7 +76,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -87,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">diveRpine</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -95,24 +98,12 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/supp_references.html">Supporting references</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -120,8 +111,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/ajpelu/diveRpine">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/ajpelu/diveRpine/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,7 +138,7 @@
     <p>This function computes the initial values of richness values for each patch.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>initRichness</span>(<span class='no'>r</span>, <span class='no'>draster</span>, <span class='no'>r_range</span>, <span class='no'>treedensity</span>, <span class='no'>pastUse</span>, <span class='kw'>rescale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>initRichness</span><span class='op'>(</span><span class='va'>r</span>, <span class='va'>draster</span>, <span class='va'>r_range</span>, <span class='va'>treedensity</span>, <span class='va'>pastUse</span>, rescale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,40 +198,36 @@ Sierra Nevada (southern Spain) See References.</p>
 &#8220;Are pine plantations valid tools for restoring Mediterranean forests? An assessment along abiotic and biotic gradients.&#8221;
 <em>Ecological Applications</em>, <b>19</b>(8), 2124--2141.
 doi: <a href='https://doi.org/10.1890/08-1656.1'>10.1890/08-1656.1</a>
-.</p>
+, <a href='https://doi.org/10.1890/08-1656.1'>https://doi.org/10.1890/08-1656.1</a>.</p>
 <p>Mendoza I, Gómez-Aparicio L, Zamora R, Matías L (2009).
 &#8220;Recruitment limitation of forest communities in a degraded Mediterranean landscape.&#8221;
 <em>Journal of Vegetation Science</em>, <b>20</b>(2), 367--376.
 doi: <a href='https://doi.org/10.1111/j.1654-1103.2009.05705.x'>10.1111/j.1654-1103.2009.05705.x</a>
-.</p>
-<p>González-Moreno P, Quero J, Poorter L, Bonet F, Zamora R (2011).
+, <a href='https://doi.org/10.1111/j.1654-1103.2009.05705.x'>https://doi.org/10.1111/j.1654-1103.2009.05705.x</a>.</p>
+<p>González-Moreno P, Quero JL, Poorter L, Bonet FJ, Zamora R (2011).
 &#8220;Is spatial structure the key to promote plant diversity in Mediterranean forest plantations?&#8221;
 <em>Basic and Applied Ecology</em>, <b>12</b>(3), 251--259.
 doi: <a href='https://doi.org/10.1016/j.baae.2011.02.012'>10.1016/j.baae.2011.02.012</a>
-.</p>
+, <a href='https://doi.org/https://doi.org/10.1016/j.baae.2011.02.012'>https://doi.org/https://doi.org/10.1016/j.baae.2011.02.012</a>.</p>
 <p>Navarro-González I, Pérez-Luque AJ, Bonet FJ, Zamora R (2013).
 &#8220;The weight of the past: land-use legacies and recolonization of pine plantations by oak trees.&#8221;
 <em>Ecological Applications</em>, <b>23</b>(6), 1267--1276.
 doi: <a href='https://doi.org/10.1890/12-0459.1'>10.1890/12-0459.1</a>
-.</p>
+, <a href='https://doi.org/10.1890/12-0459.1'>https://doi.org/10.1890/12-0459.1</a>.</p>
 <p>Pérez-Luque AJ, Bonet FJ, Pérez-Pérez R, Aspizua R, Lorite J, Zamora R (2014).
 &#8220;Sinfonevada: Dataset of floristic diversity in Sierra Nevada forests (SE Spain).&#8221;
 <em>PhytoKeys</em>, <b>35</b>, 1--15.
 doi: <a href='https://doi.org/10.3897/phytokeys.35.6363'>10.3897/phytokeys.35.6363</a>
-.</p>
+, <a href='https://doi.org/10.3897/phytokeys.35.6363'>https://doi.org/10.3897/phytokeys.35.6363</a>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Antonio J Pérez-Luque (<a href='mailto:ajpelu@gmail.com'>ajpelu@gmail.com</a>)</p>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Antonio J Pérez-Luque (<a href='mailto:ajpelu@gmail.com'>ajpelu@gmail.com</a>)</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -251,7 +238,7 @@ doi: <a href='https://doi.org/10.3897/phytokeys.35.6363'>10.3897/phytokeys.35.63
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

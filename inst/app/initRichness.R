@@ -23,15 +23,15 @@
 #' pixel.
 #'
 #' @details This function computes the initial richness for each land-use
-#' categories. The richness values of each pixel of the focal (target) pine
+#' categories. The richenss values of each pixel of the focal (target) pine
 #' patch depends on:
 #' \itemize{
 #'   \item Stand structure: tree density, patch size, past land-use
 #'   \item Distance to seed source (landscape configuration)
 #' }
 #'
-#' Richness value for each of the patch classes (\emph{i.e.} pine plantation,
-#' natural forests, shrublands and crops) are calculated considering the range
+#' Richenss value for each of the patch classes (\emph{i.e.} pine plantation,
+#' natural forests, shrubland and crops) are calculated considering the range
 #' of possible values found on the study area. In this case we use data from
 #' Sierra Nevada (southern Spain) See References.
 #'
@@ -54,9 +54,9 @@
 initRichness <- function(r, draster, r_range, treedensity, pastUse, rescale=TRUE){
 
   # --- N cells
-  ncell_pp <- raster::ncell(r[r == 1])
-  ncell_nf <- raster::ncell(r[r == 2])
-  ncell_crop <- raster::ncell(r[r == 3])
+  ncell_pp <- ncell(r[r == 1])
+  ncell_nf <- ncell(r[r == 2])
+  ncell_crop <- ncell(r[r == 3])
 
   # --- Potential Richness values
   ## Ranges
@@ -83,11 +83,11 @@ initRichness <- function(r, draster, r_range, treedensity, pastUse, rescale=TRUE
 
   ## ~ Distance to Seed Source
   ### Compute diversity raster (See Gonzalez-Moreno et al. 2011)
-  sh <- raster::calc(draster, fun=function(x){1.7605 - 0.0932*(sqrt(sqrt(x)))})
+  sh <- calc(draster, fun=function(x){1.7605 - 0.0932*(sqrt(sqrt(x)))})
 
   ### Create a stack with the shanon diversity raster and landuse raster,
   ### and then compute values for pine plantations
-  s <- raster::calc(stack(r, sh), fun=function(x)  ifelse(x[1] == -100 , (x[1]/-100)*x[2],  NA))
+  s <- calc(stack(r, sh), fun=function(x)  ifelse(x[1] == -100 , (x[1]/-100)*x[2],  NA))
 
   ### Scale the distance effect from 0 to 1
   sh_scaled <- (s - cellStats(s, "min"))/(cellStats(s, "max") - cellStats(s, "min"))
@@ -112,7 +112,7 @@ initRichness <- function(r, draster, r_range, treedensity, pastUse, rescale=TRUE
 
   # Rescale results
   if (rescale)
-    r <- (r - raster::cellStats(r, "min"))/(raster::cellStats(r, "max") - raster::cellStats(r, "min"))
+    r <- (r - cellStats(r, "min"))/(cellStats(r, "max") - cellStats(r, "min"))
 
   return(r)
 
