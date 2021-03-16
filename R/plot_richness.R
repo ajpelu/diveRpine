@@ -2,7 +2,7 @@
 #'
 #' Plot the richness values for the landscape created by the user
 #'
-#' @param x Raster* object
+#' @param x A \code{raster} object
 #'
 #' @return ggplot2 Object
 #'

@@ -2,10 +2,7 @@
 #'
 #' Plot the landscape created by the user
 #'
-#' @param x Raster* object
-#'
-#' This function is inspired by the show_landscape function within
-#' landscapetools pkg (\url{https://github.com/ropensci/landscapetools}).
+#' @param x A \code{raster} object
 #'
 #' @return ggplot2 Object
 #'
