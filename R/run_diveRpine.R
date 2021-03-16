@@ -6,7 +6,7 @@
 #' @importFrom shiny shinyApp
 #'
 run_diveRpine <- function() {
-  appDir <- system.file("inst","app", package = "diveRpine")
+  appDir <- system.file("app", package = "diveRpine")
   if (appDir == "") {
     stop("Could not find app directory. Try re-installing `diveRpine`.", call. = FALSE)
   }
