@@ -1,5 +1,5 @@
 destination: docs
-
+url: https://ajpelu.github.io/diveRpine
 template:
   params:
     bootswatch: yeti
