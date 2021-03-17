@@ -5,11 +5,4 @@ template:
     bootswatch: yeti
     ganalytics: UA-161864428-1
 
-navbar:
-  components:
-    articles:
-      text: "Articles"
-      menu:
-      - text: "Supporting references"
-        href: articles/supp-references.html
 
