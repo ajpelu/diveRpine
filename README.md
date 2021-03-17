@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# diveRpine <img src="man/figures/logo.png" align="right" width="240"/>
+# <span style="color:#68AF5D">diveRpine</span> <img src="man/figures/logo.png" align="right" width="240"/>
 
-## **dive**rsification of **pine** plantations in Mediterranean mountains
+## <span style="color:#68AF5D">**diveR**</span>sification of <span style="color:#68AF5D">**pine**</span> plantations in Mediterranean mountains
 
 <!-- badges: start -->
 
