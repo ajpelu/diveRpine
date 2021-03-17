@@ -6,9 +6,6 @@ template:
     ganalytics: UA-161864428-1
 
 navbar:
-  structure:
-    left: [home, reference, articles, new]
-    right: [github]
   components:
     articles:
       text: "Articles"
