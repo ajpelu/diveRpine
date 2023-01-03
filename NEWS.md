@@ -1,5 +1,9 @@
 # NEWS
 
+# diveRpine 1.1.1
+## General comments 
+- Add a new vignette with all the packages used to develop the diveRpine. Improve the vignette of supporting references (using a bib file)
+
 # diveRpine 1.1.0 
 ## General comments 
 - Remove functions createLandscape.R; disper.R; and disper_time.R
