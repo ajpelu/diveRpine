@@ -6,14 +6,15 @@
 \alias{diveRpine-package}
 \title{diveRpine: Diversification of Pine Plantations}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Tool for analyze how different forest-management actions modify the biodiversity-related ecosystem services in Mediterranean mountain pine plantationsUse.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ajpelu/diveRpine}
+  \item \url{https://ajpelu.github.io/diveRpine}
+  \item \url{https://ajpelu.github.io/diveRpine/}
   \item Report bugs at \url{https://github.com/ajpelu/diveRpine/issues}
 }
 
