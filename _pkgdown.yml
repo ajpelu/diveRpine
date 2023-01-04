@@ -1,5 +1,6 @@
-url: https://ajpelu.github.io/diveRpine/
+destination: docs
+url: https://ajpelu.github.io/diveRpine
 template:
-  bootstrap: 5
-development:
-  mode: auto
+  params:
+    bootswatch: yeti
+    ganalytics: UA-161864428-1

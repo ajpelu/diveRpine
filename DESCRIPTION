@@ -30,7 +30,9 @@ Imports:
     sf, 
     shiny,
     Rdpack,
-    magrittr
+    magrittr,
+    grateful, 
+    landscapeR
 Suggests: 
     pkgdown,
     spelling,
