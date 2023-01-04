@@ -31,7 +31,6 @@ Imports:
     shiny,
     Rdpack,
     magrittr,
-    grateful, 
     landscapeR
 Suggests: 
     pkgdown,
