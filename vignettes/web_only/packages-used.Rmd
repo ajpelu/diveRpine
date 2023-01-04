@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 The following table shows the packages used to develop and run the `diveRpine` package: 
 
 ```{r citations, include=FALSE}
-library(remotes)
+install.packages("remotes")
 remotes::install_github("Pakillo/grateful")
 library(grateful)
 s <- read.csv("pkg_used.csv")
