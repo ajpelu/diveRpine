@@ -1,9 +1,10 @@
-pandoc: 2.11.2
-pkgdown: 1.6.1
+pandoc: '2.18'
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  packages-used: packages-used.html
   supp-references: supp-references.html
-last_built: 2021-03-17T10:12Z
+last_built: 2023-01-04T06:47Z
 urls:
   reference: https://ajpelu.github.io/diveRpine/reference
   article: https://ajpelu.github.io/diveRpine/articles

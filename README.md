@@ -70,7 +70,7 @@ and run it locally. You can also use a running example
 devtools::install_github("ajpelu/diveRpine")
 ```
 
-1.  Run the app:
+3.  Run the app:
 
 ``` r
 library("diveRpine")
