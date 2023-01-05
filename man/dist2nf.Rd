@@ -13,11 +13,17 @@ dist2nf(x, nf_value)
 (default value = 2)}
 }
 \value{
-A \code{raster} object with the minimun distance for each raster cell
+A \code{raster} object with the minimum distance for each raster pixel
 }
 \description{
-Compute the distance between each pixel of the focal pine plantation and the
-edges of all natural forests. Then get the minimun distance for each pixel.
+\code{dist2nf} computes the distance between the target pine plantation and
+all surroundings natural forests patches
+}
+\details{
+This auxiliary function calculates the distance for each pixel of the target
+pine plantation to the edges of all surrounding natural forest plots. For
+each pixel, the final value considered is the minimum of all distances
+from that pixel to the edges of natural forests.
 }
 \author{
 Antonio J Pérez-Luque (\email{ajpelu@gmail.com})
