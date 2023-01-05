@@ -1,4 +1,5 @@
-url: ~
+destination: docs
+url: https://ajpelu.github.io/diveRpine
 template:
   bootstrap: 5
 
