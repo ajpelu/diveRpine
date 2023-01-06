@@ -1,17 +1,17 @@
 #' Distance to Natural forests
 #'
 #' \code{dist2nf} computes the distance between the target pine plantation and
-#' all surroundings natural forests patches
+#' all surroundings natural forests patches.
 #'
 #' This auxiliary function calculates the distance for each pixel of the target
-#' pine plantation to the edges of all surrounding natural forest plots. For
+#' pine plantation to the edges of all surrounding natural forest patches. For
 #' each pixel, the final value considered is the minimum of all distances
 #' from that pixel to the edges of natural forests.
 #'
 #' @param x A \code{raster} object
 #'
-#' @param nf_value The value of "Natural Forests" class within the raster
-#' (default value = 2)
+#' @param nf_value The value of "Natural Forests" landscape class within the
+#' raster (default value = 2).
 #'
 #' @return A \code{raster} object with the minimum distance for each raster pixel
 #'
@@ -22,8 +22,14 @@
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 
 dist2nf <- function(x, nf_value) {
+  if (missing(nf_value)) {
+    nf_value <- 2
+  } else {
+    nf_value
+  }
+
   # Get boundary limits of NF, and save as polygon
-  nf_edges <- rasterToPolygons(x, fun = function(x) {
+  nf_edges <- raster::rasterToPolygons(x, fun = function(x) {
     x == nf_value
   }, dissolve = TRUE)
 

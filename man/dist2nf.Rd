@@ -9,19 +9,19 @@ dist2nf(x, nf_value)
 \arguments{
 \item{x}{A \code{raster} object}
 
-\item{nf_value}{The value of "Natural Forests" class within the raster
-(default value = 2)}
+\item{nf_value}{The value of "Natural Forests" landscape class within the
+raster (default value = 2).}
 }
 \value{
 A \code{raster} object with the minimum distance for each raster pixel
 }
 \description{
 \code{dist2nf} computes the distance between the target pine plantation and
-all surroundings natural forests patches
+all surroundings natural forests patches.
 }
 \details{
 This auxiliary function calculates the distance for each pixel of the target
-pine plantation to the edges of all surrounding natural forest plots. For
+pine plantation to the edges of all surrounding natural forest patches. For
 each pixel, the final value considered is the minimum of all distances
 from that pixel to the edges of natural forests.
 }
