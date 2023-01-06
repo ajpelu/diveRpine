@@ -4,11 +4,11 @@
 #'
 #' @param x A \code{raster} object with the landscape configured
 #
-#' @param pd A \code{raster stack} object with rasters from the potential
+#' @param pd A \code{raster stack} object with raster from the potential
 #' dispersion. See \code{potential_dispersion} function.
 #'
 #' @param pp_value The value of "pine plantation" class within the raster
-#' (default value = 1)
+#' (default value = 1).
 #'
 #' @return raster Object
 #'
@@ -18,8 +18,16 @@
 #'
 #' @export
 
-input_propagule <- function(x, pd, pp_value){
-  pp <- raster::rasterToPolygons(x, fun=function(x){x == pp_value}, dissolve = TRUE)
+input_propagule <- function(x, pd, pp_value) {
+  if (missing(pp_value)) {
+    pp_value <- 1
+  } else {
+    pp_value
+  }
+
+  pp <- raster::rasterToPolygons(x, fun = function(x) {
+    x == pp_value
+  }, dissolve = TRUE)
   propagules_pp <- raster::mask(pd, pp)
   return(propagules_pp)
 }

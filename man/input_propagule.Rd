@@ -9,11 +9,11 @@ input_propagule(x, pd, pp_value)
 \arguments{
 \item{x}{A \code{raster} object with the landscape configured}
 
-\item{pd}{A \code{raster stack} object with rasters from the potential
+\item{pd}{A \code{raster stack} object with raster from the potential
 dispersion. See \code{potential_dispersion} function.}
 
 \item{pp_value}{The value of "pine plantation" class within the raster
-(default value = 1)}
+(default value = 1).}
 }
 \value{
 raster Object
