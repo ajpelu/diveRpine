@@ -8,10 +8,10 @@
 #' @param rich_nf A \code{raster} object with richness of the natural forests
 #'
 #' @param nf_value The value of "Natural Forests" class within the raster
-#' (default value = 2)
+#' (default value = 2).
 #'
 #' @param pp_value The value of "pine plantation" class within the raster
-#' (default value = 1)
+#' (default value = 1).
 #'
 #' @return \code{raster} objects with values of potential dispersion for each
 #' type of disperser
@@ -75,6 +75,18 @@
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
+
+  if (missing(nf_value)) {
+    nf_value <- 2
+  } else {
+    nf_value
+  }
+
+  if (missing(pp_value)) {
+    pp_value <- 1
+  } else {
+    pp_value
+  }
 
   # Output stacks
   sb <- stack()
