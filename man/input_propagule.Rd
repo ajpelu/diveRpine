@@ -10,7 +10,7 @@ input_propagule(x, pd, pp_value)
 \item{x}{A \code{raster} object with the landscape configured}
 
 \item{pd}{A \verb{raster stack} object with raster from the potential
-dispersion. See \code{potential_dispersion} function.}
+dispersion. See details.}
 
 \item{pp_value}{The value of "pine plantation" class within the raster
 (default value = 1).}
@@ -23,7 +23,8 @@ Compute the propagule input into target pine plantation.
 }
 \details{
 This auxiliary function masks the raster generated from the
-\code{potential_dispersion} function with the limits of the target pine plantation.
+\code{\link[=potential_dispersion]{potential_dispersion()}} function with the limits of the target
+pine plantation.
 }
 \author{
 Antonio J Pérez-Luque (\email{ajpelu@gmail.com})

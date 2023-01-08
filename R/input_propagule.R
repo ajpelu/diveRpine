@@ -5,13 +5,14 @@
 #' @param x A `raster` object with the landscape configured
 #
 #' @param pd A `raster stack` object with raster from the potential
-#' dispersion. See `potential_dispersion` function.
+#' dispersion. See details.
 #'
 #' @param pp_value The value of "pine plantation" class within the raster
 #' (default value = 1).
 #'
 #' @details This auxiliary function masks the raster generated from the
-#' `potential_dispersion` function with the limits of the target pine plantation.
+#' [diveRpine::potential_dispersion()] function with the limits of the target
+#' pine plantation.
 #'
 #'
 #' @return raster Object
