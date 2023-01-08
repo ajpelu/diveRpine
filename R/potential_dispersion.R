@@ -1,6 +1,6 @@
 #' Compute the potential dispersion
 #'
-#' Compute the propagule input from each patch to focal pine plantation using
+#' Compute the propagule input from each patch to target pine plantation using
 #' three classes of disperses and different kernels equations.
 #'
 #' @param x A `raster` object with the landscape configured
@@ -13,18 +13,29 @@
 #' @param pp_value The value of "pine plantation" class within the raster
 #' (default value = 1).
 #'
+#' @param kernel_sbi,kernel_mbi,kernel_ma The dispersion kernel functions for
+#' small birds (`kernel_sbi`), medium birds (`kernel_mbi`) and mammals (`kernel_ma`).
+#' See details.
+#'
+#' @param seedlim_int,seedlim_slope The intercept and slope of the linear relation
+#' between the seed limitation in the target plantation and the adjacency of a
+#' natural forest patch with the target pine plantation. See details
+#'
 #' @return `raster` objects with values of potential dispersion for each
 #' type of disperser
+#'
+#'
 #' @details
 #'
 #' It computes the propagule input from each patch to focal pine plantation
 #' using three classes of disperses and different kernels.
 #' \itemize{The quantity and quality of seed dispersion are influenced by:
 #'   \item Seed sources: seed diversity in seed source patch, and patch size
-#'   \item Disperses: percentage of each disperser
+#'   \item Disperses: percentage of each disperser type
 #'   \item Landscape configuration
 #'}
-#' \itemize{Three classes of disperses were considered:
+#' \itemize{Three classes of disperses were considered by default for the study
+#' area:
 #'   \item small birds, *e.g.* European robin (*Erithacus rubecula*),
 #'   Sardinian warbler (*Sylvia melanocephala*)
 #'   \item medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
@@ -74,7 +85,9 @@
 #' @importFrom methods as
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
-potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
+potential_dispersion <- function(x, nf_value, pp_value, rich_nf,
+                                 kernel_sbi, kernel_mbi, kernel_ma,
+                                 seedlim_int, seedlim_slope) {
 
   if (missing(nf_value)) {
     nf_value <- 2
@@ -87,6 +100,43 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
   } else {
     pp_value
   }
+
+  # Kernels
+  if (missing(kernel_sbi)) {
+    kernel_sbi <- function(x){dlnorm(x, meanlog = log(51), sdlog = .7)}
+  } else {
+    kernel_sbi
+  }
+
+  if (missing(kernel_mbi)) {
+    kernel_mbi <- function(x){dlnorm(x, meanlog = log(201), sdlog = .7)}
+  } else {
+    kernel_mbi
+  }
+
+  if (missing(kernel_ma)) {
+    kernel_ma <- function(x){
+      ifelse(x <= 400,
+             dweibull(x, shape = 1.385, scale = 137),
+             dlnorm(x, meanlog = 6.621, sdlog = 0.297))}
+  } else {
+    kernel_ma
+  }
+
+  # Seed Limit
+  if (missing(seedlim_int)) {
+    seedlim_int <- 0.733
+  } else {
+    seedlim_int
+  }
+
+  if (missing(seedlim_slope)) {
+    seedlim_slope <- 0.0039
+  } else {
+    seedlim_slope
+  }
+
+
 
   # Output stacks
   sb <- stack()
@@ -127,7 +177,7 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
     adj <- (length_inter / perimeter_pine)*100
     ## Compute the seed entry (1 - seed limit) (only for nf with intersection)
     # (seedlimit=a + b*adj) see Zamora et al.2010  a=0.7327; b = -0.0039
-    seedentry <- (1 - (0.7330 - (0.0039*adj)))
+    seedentry <- (1 - (seedlim_int - (seedlim_slope*adj)))
     # Standardize seedentry from 0 to 1
     # 0 % adj --> 1 - (a + b*0%) = 1 - a; 0.267
     # 100 % adj --> 1 - (a + b*100); 0.657
@@ -143,24 +193,21 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
 
     # --- Dispersion contribution
     ## Small bird
-    sbi <- raster::calc(d_nfi, fun = function(x){dlnorm(x, meanlog = log(51), sdlog = .7)})
+    sbi <- raster::calc(d_nfi, fun = kernel_sbi)
     names(sbi) <- paste0('sb',i)
     ### potential contribution
     sbipot <- stack(sbi*rich.mean*fc, sbi*rich.sd*fc, sbi*rich.se*fc)
     names(sbipot) <- c(paste0("sbpot_", i, "_mean"), paste0("sbpot_", i, "_sd"), paste0("sbpot_", i, "_se"))
 
     ## Medium bird
-    mbi <- raster::calc(d_nfi, fun = function(x){dlnorm(x, meanlog = log(201), sdlog = .7)})
+    mbi <- raster::calc(d_nfi, fun = kernel_mbi)
     names(mbi) <- paste0('mb',i)
     ### potential contribution
     mbipot <- stack(mbi*rich.mean*fc, mbi*rich.sd*fc, mbi*rich.se*fc)
     names(mbipot) <- c(paste0("mbpot_", i, "_mean"), paste0("mbpot_", i, "_sd"), paste0("mbpot_", i, "_se"))
 
     ## Mammals (not included adjacency correction)
-    mai <- raster::calc(d_nfi, fun = function(x){
-      ifelse(x <= 400,
-             dweibull(x, shape = 1.385, scale = 137),
-             dlnorm(x, meanlog = 6.621, sdlog = 0.297))})
+    mai <- raster::calc(d_nfi, fun = kernel_ma)
     names(mai) <- paste0('ma',i)
     ### potential contribution
     maipot <- stack(mai*rich.mean, mai*rich.sd, mai*rich.se)
