@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ajpelu.github.io/diveRpine/404.html</loc>
+  </url>
+  <url>
+    <loc>https://ajpelu.github.io/diveRpine/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://ajpelu.github.io/diveRpine/authors.html</loc>
+  </url>
+  <url>
     <loc>https://ajpelu.github.io/diveRpine/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ajpelu.github.io/diveRpine/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ajpelu.github.io/diveRpine/reference/create_landscape.html</loc>
   </url>
   <url>
     <loc>https://ajpelu.github.io/diveRpine/reference/dist2nf.html</loc>
   </url>
   <url>
     <loc>https://ajpelu.github.io/diveRpine/reference/diveRpine-package.html</loc>
+  </url>
+  <url>
+    <loc>https://ajpelu.github.io/diveRpine/reference/index.html</loc>
   </url>
   <url>
     <loc>https://ajpelu.github.io/diveRpine/reference/initRichness.html</loc>
@@ -35,8 +53,5 @@
   </url>
   <url>
     <loc>https://ajpelu.github.io/diveRpine/reference/summaryRaster.html</loc>
-  </url>
-  <url>
-    <loc>https://ajpelu.github.io/diveRpine/articles/supp-references.html</loc>
   </url>
 </urlset>
