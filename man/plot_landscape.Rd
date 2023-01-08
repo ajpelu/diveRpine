@@ -9,7 +9,7 @@ plot_landscape(x, ...)
 \arguments{
 \item{x}{A \code{raster} object}
 
-\item{...}{others arguments (from ggplot2)}
+\item{...}{others arguments (from \link{ggplot2})}
 }
 \value{
 ggplot2 Object

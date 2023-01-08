@@ -3,7 +3,7 @@
 #' Plot the landscape created by the user
 #'
 #' @param x A `raster` object
-#' @param ... others arguments (from ggplot2)
+#' @param ... others arguments (from [ggplot2])
 #'
 #' @return ggplot2 Object
 #'
