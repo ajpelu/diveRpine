@@ -4,15 +4,27 @@
 \alias{initRichness}
 \title{Set values of Initial Richness}
 \usage{
-initRichness(r, draster, r_range, treedensity, pastUse, rescale = TRUE)
+initRichness(
+  r,
+  draster,
+  r_range,
+  treedensity,
+  pastUse,
+  ftreeden,
+  fdist,
+  w_past,
+  w_treeden,
+  w_dist,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{r}{A \code{raster} object with the configured landscape}
 
 \item{draster}{A \code{raster} object with values of the distance from the
-target patch to natural forest patchs}
+target patch to natural forest patches.}
 
-\item{r_range}{A \code{data frame} with three columns: \code{value} of land use
+\item{r_range}{A \verb{data frame} with three columns: \code{value} of land use
 (\code{integer}: 0 = "Other", 1 = "Pine plantation", 2 = "Natural Forests",
 3 = "Crop"); \code{lowRich} and \code{upRich} (lower and upper value of the
 range of Richness)\insertCite{@see @GomezAparicio2009}{diveRpine}.}
@@ -20,7 +32,15 @@ range of Richness)\insertCite{@see @GomezAparicio2009}{diveRpine}.}
 \item{treedensity}{density of the pine plantation (\code{integer})}
 
 \item{pastUse}{the past land use of the pine plantation (\code{character}).
-One of "Oak", "Shrubland", "Pasture" or "Crop"}
+One of "Oak", "Shrubland", "Pasture" or "Crop".}
+
+\item{ftreeden, fdist}{functions used to computed the effect of tree
+density (\code{ftreeden}), and of the distance to natural forest (\code{fdist})
+on richness values within pine plantation. See details.}
+
+\item{w_dist, w_treeden, w_past}{weights applied to the functions that
+correct the plant richness values according to the distance to seed source,
+the tree density, and the past-land use of the pine plantation.}
 
 \item{rescale}{If "TRUE" the results are rescaled (0 = min and 1 = max)}
 }
@@ -32,12 +52,26 @@ pixel.
 This function computes the initial values of richness values for each patch.
 }
 \details{
-This function computes the initial richness for each land-use
-categories. The richenss values of each pixel of the focal (target) pine
+This function computes the initial plant richness for the land-use
+categories (\emph{e.g.} target pine-plantation, surrounding natural
+forests, shrubland and crops). For each land-use category, the richness value
+of the pixels in each of the patches is randomly calculated from a range
+of potential richness values specified by \code{r_range}.
+
+The range of plant richness values is specified by
+\code{r_range}. In the diveRpine app, those values are calculated considering
+the range of possible values found on the study area. I
+
+Richness value for each of the patch classes (\emph{i.e.} pine plantation,
+natural forests, shrubland and crops) are calculated considering the range
+of possible values found on the study area. In this case we use data from
+Sierra Nevada (southern Spain)
+
+The richness values of each pixel of the focal (target) pine
 patch depends on:
 \itemize{
-  \item Stand structure: tree density, patch size, past land-use
-  \item Distance to seed source (landscape configuration)
+\item Stand structure: tree density, patch size, past land-use
+\item Distance to seed source (landscape configuration)
 }
 
 Richenss value for each of the patch classes (\emph{i.e.} pine plantation,

@@ -17,6 +17,14 @@ ggplot2 Object
 \description{
 Plot the richness values for the landscape created by the user
 }
+\details{
+This auxiliary function plots the plant richness values of the
+landscape when the landscape is configured (see \emph{Compute Initial Richness}
+button in the app), and also the final richness (after the \emph{Dispersers} and
+\emph{Simulation} modules were chosen by the user in the app). In both cases
+\code{plot_richness} plots the plant richness for each pixel within each of the
+landscape categories.
+}
 \author{
 Antonio J Pérez-Luque (\email{ajpelu@gmail.com})
 }

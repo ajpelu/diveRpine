@@ -10,10 +10,10 @@ potential_dispersion(x, nf_value, pp_value, rich_nf)
 \item{x}{A \code{raster} object with the landscape configured}
 
 \item{nf_value}{The value of "Natural Forests" class within the raster
-(default value = 2)}
+(default value = 2).}
 
 \item{pp_value}{The value of "pine plantation" class within the raster
-(default value = 1)}
+(default value = 1).}
 
 \item{rich_nf}{A \code{raster} object with richness of the natural forests}
 }
@@ -29,29 +29,29 @@ three classes of disperses and different kernels equations.
 It computes the propagule input from each patch to focal pine plantation
 using three classes of disperses and different kernels.
 \itemize{The quantity and quality of seed dispersion are influenced by:
-  \item Seed sources: seed diversity in seed source patch, and patch size
-  \item Disperses: percentage of each disperser
-  \item Landscape configuration
+\item Seed sources: seed diversity in seed source patch, and patch size
+\item Disperses: percentage of each disperser
+\item Landscape configuration
 }
 \itemize{Three classes of disperses were considered:
-  \item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}),
-  Sardinian warbler (\emph{Sylvia melanocephala})
-  \item medium birds, \emph{e.g.} Eurasian jay (\emph{Garrulus glandarius})
-  \item mammals, \emph{e.g.} Red fox (\emph{Vulpes vulpes})
+\item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}),
+Sardinian warbler (\emph{Sylvia melanocephala})
+\item medium birds, \emph{e.g.} Eurasian jay (\emph{Garrulus glandarius})
+\item mammals, \emph{e.g.} Red fox (\emph{Vulpes vulpes})
 }
 
 \itemize{For each type of disperser, different dispersion kernels have been
 considered.
-  \item Small-sized birds rarely exceed 100 m in distance, and approximately
-  50\% of the seeds are dispersed in the first 50 m.
-  \item Medium-sized birds disperse 50\% of the seeds over a distance of more
-  than 100 m. The Eurasyan jay shows a dispersion range between 5 and
-  1000 m for Sierra Nevada mountains (SE Spain). The distance at which
-  the maximum dispersion occurs depends on the target patch, being
-  approximately 400 me when the target patch is a pine plantation.
-  \item Mammals disperse in a range from 0 to more than 1500 m, with
-  the dispersion peak at 650 - 700 m. More than 50\% of the seeds
-  dispersed by mammals are deposited at distances greater than 495 m.
+\item Small-sized birds rarely exceed 100 m in distance, and approximately
+50\\% of the seeds are dispersed in the first 50 m.
+\item Medium-sized birds disperse 50\\% of the seeds over a distance of more
+than 100 m. The Eurasyan jay shows a dispersion range between 5 and
+1000 m for Sierra Nevada mountains (SE Spain). The distance at which
+the maximum dispersion occurs depends on the target patch, being
+approximately 400 me when the target patch is a pine plantation.
+\item Mammals disperse in a range from 0 to more than 1500 m, with
+the dispersion peak at 650 - 700 m. More than 50\\% of the seeds
+dispersed by mammals are deposited at distances greater than 495 m.
 }
 
 This functions also considers the adjacency between each of the

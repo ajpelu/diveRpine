@@ -15,7 +15,11 @@ plot_propagule(x, ...)
 ggplot2 Object
 }
 \description{
-Plot the input propagules into the focal pine plantation
+Plot the input propagules into the target pine plantation
+}
+\details{
+This auxiliary function plot the input propagules (number of seeds by
+pixel and year) into the target pine plantation.
 }
 \author{
 Antonio J Pérez-Luque (\email{ajpelu@gmail.com})
