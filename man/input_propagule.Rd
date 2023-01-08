@@ -19,7 +19,11 @@ dispersion. See \code{potential_dispersion} function.}
 raster Object
 }
 \description{
-Compute the propagule input into focal pine plantation.
+Compute the propagule input into target pine plantation.
+}
+\details{
+This auxiliary function masks the raster generated from the
+\code{potential_dispersion} function with the limits of the target pine plantation.
 }
 \author{
 Antonio J Pérez-Luque (\email{ajpelu@gmail.com})

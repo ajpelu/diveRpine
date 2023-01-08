@@ -1,6 +1,6 @@
 #' Seed input propagules into pine plantation
 #'
-#' Compute the propagule input into focal pine plantation.
+#' Compute the propagule input into target pine plantation.
 #'
 #' @param x A `raster` object with the landscape configured
 #
@@ -9,6 +9,10 @@
 #'
 #' @param pp_value The value of "pine plantation" class within the raster
 #' (default value = 1).
+#'
+#' @details This auxiliary function masks the raster generated from the
+#' `potential_dispersion` function with the limits of the target pine plantation.
+#'
 #'
 #' @return raster Object
 #'
