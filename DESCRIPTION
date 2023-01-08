@@ -41,3 +41,4 @@ URL: https://ajpelu.github.io/diveRpine,
     https://ajpelu.github.io/diveRpine/
 Language: en-US
 Config/Needs/website: tidyverse/tidytemplate
+Roxygen: list(markdown = TRUE)
