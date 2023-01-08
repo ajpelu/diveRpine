@@ -3,9 +3,9 @@
 #' Compute the propagule input from each patch to focal pine plantation using
 #' three classes of disperses and different kernels equations.
 #'
-#' @param x A \code{raster} object with the landscape configured
+#' @param x A `raster` object with the landscape configured
 #'
-#' @param rich_nf A \code{raster} object with richness of the natural forests
+#' @param rich_nf A `raster` object with richness of the natural forests
 #'
 #' @param nf_value The value of "Natural Forests" class within the raster
 #' (default value = 2).
@@ -13,7 +13,7 @@
 #' @param pp_value The value of "pine plantation" class within the raster
 #' (default value = 1).
 #'
-#' @return \code{raster} objects with values of potential dispersion for each
+#' @return `raster` objects with values of potential dispersion for each
 #' type of disperser
 #' @details
 #'
@@ -25,10 +25,10 @@
 #'   \item Landscape configuration
 #'}
 #' \itemize{Three classes of disperses were considered:
-#'   \item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}),
-#'   Sardinian warbler (\emph{Sylvia melanocephala})
-#'   \item medium birds, \emph{e.g.} Eurasian jay (\emph{Garrulus glandarius})
-#'   \item mammals, \emph{e.g.} Red fox (\emph{Vulpes vulpes})
+#'   \item small birds, *e.g.* European robin (*Erithacus rubecula*),
+#'   Sardinian warbler (*Sylvia melanocephala*)
+#'   \item medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
+#'   \item mammals, *e.g.* Red fox (*Vulpes vulpes*)
 #'}
 #'
 #' \itemize{For each type of disperser, different dispersion kernels have been
@@ -109,7 +109,7 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf) {
     # --- distance between nf polygon i and cells of the raster
     d <- rgeos::gDistance(nf_patches[i,], methods::as(x,"SpatialPoints"), byid=TRUE)
     d_nfi <- x
-    d_nfi[] <- apply(d, 1, min)*10 # compute minimun distance; and multiply by 10 meters
+    d_nfi[] <- apply(d, 1, min)*10 # compute minimum distance; and multiply by 10 meters
     names(d_nfi) <- paste0("nf", i)
 
     # --- Adjacency

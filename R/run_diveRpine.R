@@ -1,6 +1,6 @@
 #' Run the diveRpine Shiny Application
 #'
-#' \code{run_diveRpine} runs the diveRpine shiny apps
+#' `run_diveRpine` runs the diveRpine shiny apps
 
 #' @export
 #' @importFrom shiny shinyApp
