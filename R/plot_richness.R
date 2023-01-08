@@ -2,8 +2,15 @@
 #'
 #' Plot the richness values for the landscape created by the user
 #'
-#' @param x A \code{raster} object
+#' @param x A `raster` object
 #' @param ... others arguments (from ggplot2)
+#'
+#' @details This auxiliary function plots the plant richness values of the
+#' landscape when the landscape is configured (see *Compute Initial Richness*
+#' button in the app), and also the final richness (after the *Dispersers* and
+#' *Simulation* modules were chosen by the user in the app). In both cases
+#' `plot_richness` plots the plant richness for each pixel within each of the
+#' landscape categories.
 #'
 #' @return ggplot2 Object
 #'
