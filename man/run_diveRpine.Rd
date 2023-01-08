@@ -7,5 +7,5 @@
 run_diveRpine()
 }
 \description{
-\code{run_diveRpine} runs the diveRpine shiny apps
+\code{run_diveRpine} executes the diveRpine shiny app
 }

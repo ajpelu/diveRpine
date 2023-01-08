@@ -22,7 +22,7 @@ potential_dispersion(x, nf_value, pp_value, rich_nf)
 type of disperser
 }
 \description{
-Compute the propagule input from each patch to focal pine plantation using
+Compute the propagule input from each patch to target pine plantation using
 three classes of disperses and different kernels equations.
 }
 \details{
@@ -30,10 +30,11 @@ It computes the propagule input from each patch to focal pine plantation
 using three classes of disperses and different kernels.
 \itemize{The quantity and quality of seed dispersion are influenced by:
 \item Seed sources: seed diversity in seed source patch, and patch size
-\item Disperses: percentage of each disperser
+\item Disperses: percentage of each disperser type
 \item Landscape configuration
 }
-\itemize{Three classes of disperses were considered:
+\itemize{Three classes of disperses were considered by default for the study
+area:
 \item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}),
 Sardinian warbler (\emph{Sylvia melanocephala})
 \item medium birds, \emph{e.g.} Eurasian jay (\emph{Garrulus glandarius})

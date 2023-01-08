@@ -8,8 +8,9 @@ summaryRaster(x)
 }
 \arguments{
 \item{x}{A \code{raster} object
-This function computes the mean, min, max and standard
-deviation for a specific raster}
+
+This function computes the mean, min, max, and standard deviation for a
+specific raster. All those statistics all rounded to 2 digits.}
 }
 \value{
 a list with mean, min, max, and sd.

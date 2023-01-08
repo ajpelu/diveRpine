@@ -1,6 +1,6 @@
 #' Run the diveRpine Shiny Application
 #'
-#' `run_diveRpine` runs the diveRpine shiny apps
+#' `run_diveRpine` executes the diveRpine shiny app
 
 #' @export
 #' @importFrom shiny shinyApp
