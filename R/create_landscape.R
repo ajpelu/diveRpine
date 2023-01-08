@@ -3,9 +3,9 @@
 #' Create an empty landscape as raster with a default value
 #'
 #' @param width,height dimension of the raster (ncells). Default values:
-#' \code{width} = 126 and \code{height} = 106.
+#' `width` = 126 and `height` = 106.
 #'
-#' @param value default value set for the pixels (\code{value} = 0)
+#' @param value default value set for the pixels (`value` = 0)
 #'
 #' @return raster Object
 #' @export

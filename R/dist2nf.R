@@ -1,6 +1,6 @@
 #' Distance to Natural forests
 #'
-#' \code{dist2nf} computes the distance between the target pine plantation and
+#' `dist2nf` computes the distance between the target pine plantation and
 #' all surroundings natural forests patches.
 #'
 #' This auxiliary function calculates the distance for each pixel of the target
@@ -8,12 +8,12 @@
 #' each pixel, the final value considered is the minimum of all distances
 #' from that pixel to the edges of natural forests.
 #'
-#' @param x A \code{raster} object
+#' @param x A `raster` object
 #'
 #' @param nf_value The value of "Natural Forests" landscape class within the
 #' raster (default value = 2).
 #'
-#' @return A \code{raster} object with the minimum distance for each raster pixel
+#' @return A `raster` object with the minimum distance for each raster pixel
 #'
 #'
 #' @import raster
