@@ -4,7 +4,17 @@
 \alias{potential_dispersion}
 \title{Compute the potential dispersion}
 \usage{
-potential_dispersion(x, nf_value, pp_value, rich_nf)
+potential_dispersion(
+  x,
+  nf_value,
+  pp_value,
+  rich_nf,
+  kernel_sbi,
+  kernel_mbi,
+  kernel_ma,
+  seedlim_int,
+  seedlim_slope
+)
 }
 \arguments{
 \item{x}{A \code{raster} object with the landscape configured}
@@ -16,6 +26,14 @@ potential_dispersion(x, nf_value, pp_value, rich_nf)
 (default value = 1).}
 
 \item{rich_nf}{A \code{raster} object with richness of the natural forests}
+
+\item{kernel_sbi, kernel_mbi, kernel_ma}{The dispersion kernel functions for
+small birds (\code{kernel_sbi}), medium birds (\code{kernel_mbi}) and mammals (\code{kernel_ma}).
+See details.}
+
+\item{seedlim_int, seedlim_slope}{The intercept and slope of the linear relation
+between the seed limitation in the target plantation and the adjacency of a
+natural forest patch with the target pine plantation. See details}
 }
 \value{
 \code{raster} objects with values of potential dispersion for each
@@ -42,26 +60,54 @@ Sardinian warbler (\emph{Sylvia melanocephala})
 }
 
 \itemize{For each type of disperser, different dispersion kernels have been
-considered.
+considered:
 \item Small-sized birds rarely exceed 100 m in distance, and approximately
-50\\% of the seeds are dispersed in the first 50 m.
-\item Medium-sized birds disperse 50\\% of the seeds over a distance of more
-than 100 m. The Eurasyan jay shows a dispersion range between 5 and
-1000 m for Sierra Nevada mountains (SE Spain). The distance at which
-the maximum dispersion occurs depends on the target patch, being
-approximately 400 me when the target patch is a pine plantation.
+50\% of the seeds are dispersed in the first 50 m.
+\item Medium-sized birds disperse 50\% of the seeds over a distance of more
+than 100 m. The Eurasyan jay shows a dispersion range between 5 and 1000 m
+for Sierra Nevada mountains (SE Spain). The distance at which the maximum
+dispersion occurs depends on the target patch, being approximately 400 m
+when the target patch is a pine plantation.
 \item Mammals disperse in a range from 0 to more than 1500 m, with
-the dispersion peak at 650 - 700 m. More than 50\\% of the seeds
+the dispersion peak at 650 - 700 m. More than 50\% of the seeds
 dispersed by mammals are deposited at distances greater than 495 m.
 }
 
-This functions also considers the adjacency between each of the
-natural forest patches and the focal pine plantation. It is known that the
-higher the adjacency between the natural forest and the pine plantation, the
-lower the limitation of the propagule entry dispersed by birds (Zamora et
-al.2010). Then for each natural forest patch, the adjacency to pine-plantation
-is computed. For those patches with adjacency, the potential dispersion by
-birds increases according a factor (see Zamora et al. 2010).
+According to the disperser type, the function uses by default different
+dispersion kernels. For small and medium birds a log-normal dispersion kernels
+were used. Specifically, log-normal density function with mean and standard
+deviation values of log(51) and log(2) respectively for small-sized birds,
+and log-normal density function with mean and standard deviation values of
+log(201) and log(2) for medium-sized birds. This distribution were implemented
+using the \code{\link[stats:Lognormal]{stats::dlnorm()}} function. For mammals, a combination of log-normal
+and Weibull dispersion kernel was used. Specifically, from 0 to 400 m of distance
+from the seed source, a Weibull distribution with a shape and scale parameters
+of 1.385 and 137 respectively was used (See \code{\link[stats:Weibull]{stats::dweibull()}}); whereas a
+log-normal density function with mean and standard deviation values of log(751)
+and log(1.346) respectively, were applied for distances higher than 401 m
+from seed source. Different kernels functions could be specified using the
+parameters \code{kernel_sbi}, \code{kernel_mbi}, and \code{kernel_ma}.
+
+This function also considers the adjacency between each of the natural forest
+patches and the target pine plantation. The higher the adjacency between the
+natural forest and the pine plantation, the lower the limitation of the propagule
+entry dispersed by birds. Zamora et al. (2010) found that the intercept and the
+slope of the linear relation between the seed limitation (values from 0 to 1)
+and the adjacency (\emph{i.e.} percentage of pine-plantation perimeter in contact
+with native forests) were 0.733 and 0.0039 respectively. Those parameters are
+included by default, but could be customized using the \code{seedlim_int} and
+\code{seedlim_slope} parameters. For each natural forest patch, the adjacency to
+target pine-plantation is computed. For those patches with adjacency, the
+potential dispersion by birds increases according a correction factor (see
+Zamora et al. 2010), that is computed as follows:
+
+\eqn{adj_{fc} = 1 + \frac{\textup{seed Entry} - \textup{seed Entry}_{0}}{\textup{seed Entry}_{100} - \textup{seed Entry}_{0}}}
+
+where \eqn{\textup{seed Entry} = 1- \textup{seed limitation}}; \textup{seed limitation}
+is computed using the \code{seedlim_int} and \code{seedlim_slope} parameters;
+\eqn{\textup{seed Entry}_{0}} and \eqn{\textup{seed Entry}_{100}} correspond
+to the seed entry for no adjacency and full adjacency respectively (see
+Zamora et al. 2010):
 }
 \references{
 \insertRef{Gomez2003}{diveRpine}
