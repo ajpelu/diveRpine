@@ -54,7 +54,17 @@ three classes of disperses and different kernels equations.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">potential_dispersion</span><span class="op">(</span><span class="va">x</span>, <span class="va">nf_value</span>, <span class="va">pp_value</span>, <span class="va">rich_nf</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">potential_dispersion</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">nf_value</span>,</span>
+<span>  <span class="va">pp_value</span>,</span>
+<span>  <span class="va">rich_nf</span>,</span>
+<span>  <span class="va">kernel_sbi</span>,</span>
+<span>  <span class="va">kernel_mbi</span>,</span>
+<span>  <span class="va">kernel_ma</span>,</span>
+<span>  <span class="va">seedlim_int</span>,</span>
+<span>  <span class="va">seedlim_slope</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,6 +86,18 @@ three classes of disperses and different kernels equations.</p>
 <dt>rich_nf</dt>
 <dd><p>A <code>raster</code> object with richness of the natural forests</p></dd>
 
+
+<dt>kernel_sbi, kernel_mbi, kernel_ma</dt>
+<dd><p>The dispersion kernel functions for
+small birds (<code>kernel_sbi</code>), medium birds (<code>kernel_mbi</code>) and mammals (<code>kernel_ma</code>).
+See details.</p></dd>
+
+
+<dt>seedlim_int, seedlim_slope</dt>
+<dd><p>The intercept and slope of the linear relation
+between the seed limitation in the target plantation and the adjacency of a
+natural forest patch with the target pine plantation. See details</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -95,22 +117,47 @@ Sardinian warbler (<em>Sylvia melanocephala</em>)</p></li>
 <li><p>medium birds, <em>e.g.</em> Eurasian jay (<em>Garrulus glandarius</em>)</p></li>
 <li><p>mammals, <em>e.g.</em> Red fox (<em>Vulpes vulpes</em>)</p></li>
 </ul><ul><li><p>Small-sized birds rarely exceed 100 m in distance, and approximately
-50\<!-- % of the seeds are dispersed in the first 50 m. --></p></li>
-<li><p>Medium-sized birds disperse 50\<!-- % of the seeds over a distance of more -->
-than 100 m. The Eurasyan jay shows a dispersion range between 5 and
-1000 m for Sierra Nevada mountains (SE Spain). The distance at which
-the maximum dispersion occurs depends on the target patch, being
-approximately 400 me when the target patch is a pine plantation.</p></li>
+50% of the seeds are dispersed in the first 50 m.</p></li>
+<li><p>Medium-sized birds disperse 50% of the seeds over a distance of more
+than 100 m. The Eurasyan jay shows a dispersion range between 5 and 1000 m
+for Sierra Nevada mountains (SE Spain). The distance at which the maximum
+dispersion occurs depends on the target patch, being approximately 400 m
+when the target patch is a pine plantation.</p></li>
 <li><p>Mammals disperse in a range from 0 to more than 1500 m, with
-the dispersion peak at 650 - 700 m. More than 50\<!-- % of the seeds -->
+the dispersion peak at 650 - 700 m. More than 50% of the seeds
 dispersed by mammals are deposited at distances greater than 495 m.</p></li>
-</ul><p>This functions also considers the adjacency between each of the
-natural forest patches and the focal pine plantation. It is known that the
-higher the adjacency between the natural forest and the pine plantation, the
-lower the limitation of the propagule entry dispersed by birds (Zamora et
-al.2010). Then for each natural forest patch, the adjacency to pine-plantation
-is computed. For those patches with adjacency, the potential dispersion by
-birds increases according a factor (see Zamora et al. 2010).</p>
+</ul><p>According to the disperser type, the function uses by default different
+dispersion kernels. For small and medium birds a log-normal dispersion kernels
+were used. Specifically, log-normal density function with mean and standard
+deviation values of log(51) and log(2) respectively for small-sized birds,
+and log-normal density function with mean and standard deviation values of
+log(201) and log(2) for medium-sized birds. This distribution were implemented
+using the <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">stats::dlnorm()</a></code> function. For mammals, a combination of log-normal
+and Weibull dispersion kernel was used. Specifically, from 0 to 400 m of distance
+from the seed source, a Weibull distribution with a shape and scale parameters
+of 1.385 and 137 respectively was used (See <code><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">stats::dweibull()</a></code>); whereas a
+log-normal density function with mean and standard deviation values of log(751)
+and log(1.346) respectively, were applied for distances higher than 401 m
+from seed source. Different kernels functions could be specified using the
+parameters <code>kernel_sbi</code>, <code>kernel_mbi</code>, and <code>kernel_ma</code>.</p>
+<p>This function also considers the adjacency between each of the natural forest
+patches and the target pine plantation. The higher the adjacency between the
+natural forest and the pine plantation, the lower the limitation of the propagule
+entry dispersed by birds. Zamora et al. (2010) found that the intercept and the
+slope of the linear relation between the seed limitation (values from 0 to 1)
+and the adjacency (<em>i.e.</em> percentage of pine-plantation perimeter in contact
+with native forests) were 0.733 and 0.0039 respectively. Those parameters are
+included by default, but could be customized using the <code>seedlim_int</code> and
+<code>seedlim_slope</code> parameters. For each natural forest patch, the adjacency to
+target pine-plantation is computed. For those patches with adjacency, the
+potential dispersion by birds increases according a correction factor (see
+Zamora et al. 2010), that is computed as follows:</p>
+<p>\(adj_{fc} = 1 + \frac{\textup{seed Entry} - \textup{seed Entry}_{0}}{\textup{seed Entry}_{100} - \textup{seed Entry}_{0}}\)</p>
+<p>where \(\textup{seed Entry} = 1- \textup{seed limitation}\); seed limitation
+is computed using the <code>seedlim_int</code> and <code>seedlim_slope</code> parameters;
+\(\textup{seed Entry}_{0}\) and \(\textup{seed Entry}_{100}\) correspond
+to the seed entry for no adjacency and full adjacency respectively (see
+Zamora et al. 2010):</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
