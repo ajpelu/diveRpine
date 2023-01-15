@@ -1,14 +1,19 @@
 #' Seed input propagules into pine plantation
 #'
-#' Compute the propagule input into focal pine plantation.
+#' Compute the propagule input into target pine plantation.
 #'
-#' @param x A \code{raster} object with the landscape configured
+#' @param x A `raster` object with the landscape configured
 #
-#' @param pd A \code{raster stack} object with rasters from the potential
-#' dispersion. See \code{potential_dispersion} function.
+#' @param pd A `raster stack` object with raster from the potential
+#' dispersion. See details.
 #'
 #' @param pp_value The value of "pine plantation" class within the raster
-#' (default value = 1)
+#' (default value = 1).
+#'
+#' @details This auxiliary function masks the raster generated from the
+#' [diveRpine::potential_dispersion()] function with the limits of the target
+#' pine plantation.
+#'
 #'
 #' @return raster Object
 #'
@@ -18,8 +23,16 @@
 #'
 #' @export
 
-input_propagule <- function(x, pd, pp_value){
-  pp <- raster::rasterToPolygons(x, fun=function(x){x == pp_value}, dissolve = TRUE)
+input_propagule <- function(x, pd, pp_value) {
+  if (missing(pp_value)) {
+    pp_value <- 1
+  } else {
+    pp_value
+  }
+
+  pp <- raster::rasterToPolygons(x, fun = function(x) {
+    x == pp_value
+  }, dissolve = TRUE)
   propagules_pp <- raster::mask(pd, pp)
   return(propagules_pp)
 }

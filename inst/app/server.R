@@ -20,7 +20,7 @@ library("tidyverse")
 ### -------------------------------
 # Load functions
 source("dist2nf.R")
-source("init_params.R")
+source("create_landscape.R")
 source("initRichness.R")
 source("input_propagule.R")
 source("plot_propagule.R")
@@ -28,6 +28,33 @@ source("plot_landscape.R")
 source("plot_richness.R")
 source("potential_dispersion.R")
 source("summaryRaster.R")
+
+### -------------------------------
+# Init params
+set.seed(123)
+
+## Create empty landscape
+empty_landscape <- create_landscape()
+
+## Some parameters
+line_pol <- 2 ### Line width polygon
+pp_value <- 1 ### Value for Pine plantation
+nf_value <- 2 ### Value for Natural forest
+h_plots <- 700 ### Set height plots (for dashboard)
+
+## Position for target_plantation
+position_pine <- matrix(c(nrow(empty_landscape) / 2,
+                          ncol(empty_landscape) / 2),
+                        ncol = 2, nrow = 1)
+
+## Potential number of crops patches
+n_crops <- sample(3:8, size = 1)
+
+# Propagule input density (numbers of propagule/m2 year) (see package references)
+piBird = (3.7)/100
+piMammal = (0.2)/100
+
+## ------------------------------------------------
 
 shinyServer(
   function(input, output, session) {
@@ -77,6 +104,11 @@ shinyServer(
     switch(input$pp_use, 'Natural Forests' = 'Oak', 'Shrublands' = 'Shrubland',
            'Pasture' = 'Pasture','Croplands' = 'Crop')
   })
+
+  ### Climate
+  #### Elevation
+  elevation <- reactive(input$elev)
+  radiation <- reactive(input$rad)
 
   ### Create pine plantation patch
   pine <- reactive({
@@ -148,7 +180,9 @@ shinyServer(
   ## Initial richness
   rasterRich <- reactive({
     initRichness(r = landscape(), draster = dist_raster(),
-                 r_range = ri_range, treedensity = pp_denR()$den,
+                 treedensity = pp_denR()$den,
+                 elev = elevation(),
+                 rad = radiation(),
                  pastUse = pastUse(), rescale = FALSE)
   })
 

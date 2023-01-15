@@ -1,8 +1,11 @@
 #' plot_propagule
 #'
-#' Plot the input propagules into the focal pine plantation
+#' Plot the input propagules into the target pine plantation
 #'
-#' @param x A \code{raster} object
+#' @details This auxiliary function plot the input propagules (number of seeds by
+#' pixel and year) into the target pine plantation.
+#'
+#' @param x A `raster` object
 #' @param ... others arguments (from ggplot2)
 #'
 #' @return ggplot2 Object
@@ -39,7 +42,7 @@ plot_propagule <- function(x,
       legend.position = "bottom",
       legend.title = ggplot2::element_blank(),
       panel.border = ggplot2::element_rect(fill = NA,
-                                           colour = "black", size = 1),
+                                           colour = "black", linewidth = 1),
       plot.margin = ggplot2::margin(0, 0, 0, 0, "cm")
     ) +
     ggplot2::scale_fill_distiller(palette = "YlOrBr",

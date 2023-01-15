@@ -2,8 +2,8 @@
 #'
 #' Plot the landscape created by the user
 #'
-#' @param x A \code{raster} object
-#' @param ... others arguments (from ggplot2)
+#' @param x A `raster` object
+#' @param ... others arguments (from [ggplot2::ggplot2()])
 #'
 #' @return ggplot2 Object
 #'
@@ -36,7 +36,7 @@ plot_landscape <- function(x,
       aspect.ratio = ratio,
       legend.position = "bottom",
       panel.border = ggplot2::element_rect(fill = NA,
-                                           colour = "black", size = 1),
+                                           colour = "black", linewidth = 1),
       plot.margin = ggplot2::margin(0, 0, 0, 0, "cm")
     ) +
     ggplot2::scale_x_continuous(expand = c(0, 0)) +

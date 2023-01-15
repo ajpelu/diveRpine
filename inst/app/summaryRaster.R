@@ -2,9 +2,10 @@
 #'
 #' Compute custom summary stats for specific raster
 #'
-#' @param x A \code{raster} object
-#' This function computes the mean, min, max and standard
-#' deviation for a specific raster
+#' @param x A `raster` object
+#'
+#' This function computes the mean, min, max, and standard deviation for a
+#' specific raster. All those statistics all rounded to 2 digits.
 #'
 #' @return a list with mean, min, max, and sd.
 #'

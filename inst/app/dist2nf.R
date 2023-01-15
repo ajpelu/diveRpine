@@ -1,14 +1,19 @@
 #' Distance to Natural forests
 #'
-#' Compute the distance between each pixel of the focal pine plantation and the
-#' edges of all natural forests. Then get the minimun distance for each pixel.
+#' `dist2nf` computes the distance between the target pine plantation and
+#' all surroundings natural forests patches.
 #'
-#' @param x A \code{raster} object
+#' This auxiliary function calculates the distance for each pixel of the target
+#' pine plantation to the edges of all surrounding natural forest patches. For
+#' each pixel, the final value considered is the minimum of all distances
+#' from that pixel to the edges of natural forests.
 #'
-#' @param nf_value The value of "Natural Forests" class within the raster
-#' (default value = 2)
+#' @param x A `raster` object
 #'
-#' @return A \code{raster} object with the minimun distance for each raster cell
+#' @param nf_value The value of "Natural Forests" landscape class within the
+#' raster (default value = 2).
+#'
+#' @return A `raster` object with the minimum distance for each raster pixel
 #'
 #'
 #' @import raster
@@ -16,17 +21,24 @@
 #' @importFrom methods as
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
 
-dist2nf <- function(x, nf_value){
+dist2nf <- function(x, nf_value) {
+  if (missing(nf_value)) {
+    nf_value <- 2
+  } else {
+    nf_value
+  }
 
-  # Get boundary limits of NF, and save as shapefile
-  nf_edges <- rasterToPolygons(x, fun=function(x){x == nf_value}, dissolve = TRUE)
+  # Get boundary limits of NF, and save as polygon
+  nf_edges <- raster::rasterToPolygons(x, fun = function(x) {
+    x == nf_value
+  }, dissolve = TRUE)
 
-  # get distance between each cell(as points) and nf_edges
-  dd = rgeos::gDistance(nf_edges, methods::as(x,"SpatialPoints"), byid=TRUE)
+  # get distance between each pixel(as points) and nf_edges
+  dd <- rgeos::gDistance(nf_edges, methods::as(x, "SpatialPoints"), byid = TRUE)
 
-  # Get minimun distance
+  # Get minimum distance
   dist_r <- x
-  dist_r[] = apply(dd,1,min)
+  dist_r[] <- apply(dd, 1, min)
 
   return(dist_r)
 }
