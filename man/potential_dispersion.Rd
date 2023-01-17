@@ -101,11 +101,11 @@ target pine-plantation is computed. For those patches with adjacency, the
 potential dispersion by birds increases according a correction factor (see
 Zamora et al. 2010), that is computed as follows:
 
-\eqn{adj_{fc} = 1 + \frac{\textup{seed Entry} - \textup{seed Entry}_{0}}{\textup{seed Entry}_{100} - \textup{seed Entry}_{0}}}
+\eqn{adj_{fc} = 1 + \frac{\textrm{seed Entry} - \textrm{seed Entry}_{0}}{\textrm{seed Entry}_{100} - \textrm{seed Entry}_{0}}}
 
-where \eqn{\textup{seed Entry} = 1- \textup{seed limitation}}; \textup{seed limitation}
+where \eqn{\textrm{seed Entry} = 1- \textrm{seed limitation}}; \eqn{\textrm{seed limitation}}
 is computed using the \code{seedlim_int} and \code{seedlim_slope} parameters;
-\eqn{\textup{seed Entry}_{0}} and \eqn{\textup{seed Entry}_{100}} correspond
+\eqn{\textrm{seed Entry}_{0}} and \eqn{\textrm{seed Entry}_{100}} correspond
 to the seed entry for no adjacency and full adjacency respectively (see
 Zamora et al. 2010):
 }
