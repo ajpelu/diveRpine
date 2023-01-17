@@ -22,7 +22,7 @@ h_plots <- 700
 
 ## Header ---------------------------------------------------------------
 header <- dashboardHeader(
-  title = span(img(src = "diveRpine_v1.svg", height = '50'), "diveRpine v1.1.1"),
+  title = span(img(src = "diveRpine_v1.svg", height = '50'), "diveRpine v1.2.0"),
   tags$li(
     a(
       strong("About diveRpine"),
@@ -68,7 +68,7 @@ body <- dashboardBody(
                    selected = "Shrublands", status = "success",
                    inline = TRUE
                  ),
-                 tags$p(h5(strong("Climate Effect"))),
+                 tags$p(h5(strong("Climate-proxy Factors"))),
                  sliderInput( # Climate Effect - Elev
                    inputId = "elev", label = "Elevation",
                    min = 600, max = 2600, value = 1000,
