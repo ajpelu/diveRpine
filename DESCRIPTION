@@ -2,9 +2,9 @@ Package: diveRpine
 Type: Package
 Title: Diversification of Pine Plantations
 Date: 2020
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: c(person("Antonio J.", "Pérez-Luque", 
-             email = "ajperez@ugr.es", 
+             email = "ajpelu@gmail.com", 
              role = c("aut", "cre"), 
              comment = c(ORCID = "0000-0002-1747-0469")),
              person("Regino", "Zamora", 

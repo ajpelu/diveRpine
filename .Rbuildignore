@@ -6,5 +6,5 @@
 ^pkgdown$
 ^README\.Rmd$
 ^LICENSE\.md$
-^vignettes/articles$
+^vignettes$
 ^\.github$

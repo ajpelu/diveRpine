@@ -2,3 +2,25 @@ url: https://ajpelu.github.io/diveRpine/
 template:
   bootstrap: 5
 
+reference:
+- title: Run the app
+  contents:
+  - run_diveRpine
+- title: Landscape related functions
+  contents:
+  - create_landscape
+  - dist2nf
+
+- title: Main functions
+  contents:
+  - initRichness
+  - potential_dispersion
+  - input_propagule
+
+- title: Plot and auxiliar functions
+  contents:
+  - plot_richness
+  - plot_landscape
+  - plot_propagule
+  - plot_richness
+  - summaryRaster

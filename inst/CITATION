@@ -3,13 +3,13 @@ citHeader("To cite diveRpine or acknowledge its use, please cite:")
 citEntry(
     entry = "Manual",
     title = {"diveRpine: diversification of pine plantations in Mediterranean mountains"},
-    author = personList(as.person("Antonio J. Pérez-Luque")),
-    year = {"2020"},
-    note = "R package version 1.1.0",
+    author = personList(as.person("Antonio J. Pérez-Luque"), as.person("Regino Zamora")),
+    year = {"2023"},
+    note = "R package version 1.3.0",
     doi = {"https://doi.org/10.5281/zenodo.3697818"},
     url = "https://ajpelu.github.io/diveRpine/",
     textVersion  =
-    paste("Pérez-Luque Antonio J. (2020). diveRpine: diversification of pine plantations in Mediterranean mountains. R package version 1.1.0. https://doi.org/10.5281/zenodo.3697818")
+    paste("Pérez-Luque, Antonio J. and Zamora, Regino (2023). diveRpine: diversification of pine plantations in Mediterranean mountains. R package version 1.2.0. https://doi.org/10.5281/zenodo.3697818")
     )
 
 

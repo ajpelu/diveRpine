@@ -1,9 +1,21 @@
 pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles:
-  supp-references: supp-references.html
 last_built: 2021-03-17T09:26Z
+
+reference:
+- title: Run the app
+  contents:
+  - run_diveRpine
+
+- title: Plot Functions
+  contents:
+  - plot_richness
+  - plot_landscape
+  - plot_propagule
+  - plot_richness
+
+
 urls:
   reference: https://ajpelu.github.io/diveRpine/reference
   article: https://ajpelu.github.io/diveRpine/articles

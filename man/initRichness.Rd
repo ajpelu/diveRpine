@@ -158,7 +158,7 @@ distance to the seed source. Navarro-González et al. (2013), found that the
 probability finding regeneration within a plantation varies as a function of
 past land use. We rescaled the gradient found by Navarro-González et al. (2013)
 as follow:  natural forest (0.9999), Shrubland (0.4982), Cropland (0.0279),
-and Grassland (0.0001). The value of \eqn{f(\textrm{past~Land~Use})} is selected
+and Grassland (0.0001). The value of \eqn{f(\textrm{past Land Use})} is selected
 according to the past land use specified in \code{pastUse}.
 }
 
