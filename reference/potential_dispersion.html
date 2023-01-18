@@ -12,7 +12,7 @@ three classes of disperses and different kernels equations."><meta property="og:
     
     <a class="navbar-brand me-2" href="../index.html">diveRpine</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,12 @@ three classes of disperses and different kernels equations."><meta property="og:
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/supp-references.html">Supporting references</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -152,10 +158,10 @@ included by default, but could be customized using the <code>seedlim_int</code> 
 target pine-plantation is computed. For those patches with adjacency, the
 potential dispersion by birds increases according a correction factor (see
 Zamora et al. 2010), that is computed as follows:</p>
-<p>\(adj_{fc} = 1 + \frac{\textup{seed Entry} - \textup{seed Entry}_{0}}{\textup{seed Entry}_{100} - \textup{seed Entry}_{0}}\)</p>
-<p>where \(\textup{seed Entry} = 1- \textup{seed limitation}\); seed limitation
+<p>\(adj_{fc} = 1 + \frac{\textrm{seed Entry} - \textrm{seed Entry}_{0}}{\textrm{seed Entry}_{100} - \textrm{seed Entry}_{0}}\)</p>
+<p>where \(\textrm{seed Entry} = 1- \textrm{seed limitation}\); \(\textrm{seed limitation}\)
 is computed using the <code>seedlim_int</code> and <code>seedlim_slope</code> parameters;
-\(\textup{seed Entry}_{0}\) and \(\textup{seed Entry}_{100}\) correspond
+\(\textrm{seed Entry}_{0}\) and \(\textrm{seed Entry}_{100}\) correspond
 to the seed entry for no adjacency and full adjacency respectively (see
 Zamora et al. 2010):</p>
     </div>
