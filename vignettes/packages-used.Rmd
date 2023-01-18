@@ -18,6 +18,7 @@ The following table shows the packages used to develop and run the `diveRpine` p
 install.packages("remotes")
 remotes::install_github("Pakillo/grateful")
 library(grateful)
+library(DT)
 s <- read.csv("pkg_used.csv")
 used_pkgs <- cite_packages(output = "table", pkgs = as.vector(s$pkg), citation.style = "peerj")
 ```
