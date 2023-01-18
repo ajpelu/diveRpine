@@ -1,0 +1,19 @@
+---
+title: "Supporting references"
+output: rmarkdown::html_document
+bibliography: supp-refs.bib
+csl: ecology.csl
+nocite: '@*'
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Supporting References 
+
+`diveRpine` was built using data, results and information from scientific papers published in peer-reviewed journals. Most of the manuscripts deal with the naturalization of pine plantation forests in Sierra Nevada mountain (Southern Spain), although other references were also used. To get detailed information about them, see the documentation of functions created for `diveRpine`. Here, we present a list of the main references used: 
+
