@@ -1,0 +1,35 @@
+---
+title: "Packages Used"
+output: rmarkdown::html_document
+bibliography: grateful-refs.bib
+csl: the-company-of-biologists.csl
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The following table shows the packages used to develop and run the `diveRpine` package: 
+
+```{r citations, include=FALSE}
+# library(remotes)
+# remotes::install_github("Pakillo/grateful")
+# #library(grateful)
+# 
+# s <- read.csv("pkg_used.csv")
+# used_pkgs <- cite_packages(output = "table", pkgs = as.vector(s$pkg), citation.style = "peerj") %>% 
+#   mutate(Citation = sapply(Citation, paste, collapse = " "))
+# write_csv(used_pkgs, file="pkg_used_table.csv")
+
+used_pkgs <- read.csv("pkg_used_table.csv")
+```
+
+```{r table_citations, echo=FALSE}
+library(knitr)
+kable(used_pkgs)
+``` 
+
+## References

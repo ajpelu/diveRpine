@@ -1,0 +1,25 @@
+Package,Version,Citation
+base,4.2.1,@base
+DT,0.26,@DT
+grateful,0.1.11,@grateful
+knitr,1.41,@knitr2014; @knitr2015; @knitr2022
+landscapeR,1.2,@landscapeR
+markdown,1.1,@markdown
+pkgdown,2.0.7,@pkgdown
+raster,3.6.11,@raster
+rasterVis,0.51.4,@rasterVis
+RColorBrewer,1.1.3,@RColorBrewer
+Rdpack,2.4,@Rdpack
+rgeos,0.6.1,@rgeos
+rintrojs,0.3.2,@rintrojs
+rmarkdown,2.19,@rmarkdown2018; @rmarkdown2020; @rmarkdown2022
+sf,1.0.9,@sf
+shiny,1.7.4,@shiny
+shinycssloaders,1.0.0,@shinycssloaders
+shinydashboard,0.7.2,@shinydashboard
+shinyjs,2.1.0,@shinyjs
+shinythemes,1.2.0,@shinythemes
+shinyWidgets,0.7.5,@shinyWidgets
+sp,1.5.1,@sp2005; @sp2013
+spelling,2.2,@spelling
+tidyverse,1.3.2,@tidyverse

@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Antonio J. Pérez-Luque \email{ajperez@ugr.es} (\href{https://orcid.org/0000-0002-1747-0469}{ORCID})
+\strong{Maintainer}: Antonio J. Pérez-Luque \email{ajpelu@gmail.com} (\href{https://orcid.org/0000-0002-1747-0469}{ORCID})
 
 Other contributors:
 \itemize{
