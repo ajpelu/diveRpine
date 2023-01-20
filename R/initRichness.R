@@ -27,6 +27,8 @@
 #' @param pastUse the past land use of the pine plantation (`character`).
 #' One of "Oak", "Shrubland", "Pasture" or "Crop".
 #'
+#' @param elev,rad elevation and annual radiation of the pine plantation
+#'
 #' @param rescale If "TRUE" the results are rescaled (0 = min and 1 = max)
 #'
 #' @return A `raster` object with values of initial richness for each
@@ -146,7 +148,7 @@
 #' @importFrom stats runif
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
-
+#' @export
 initRichness <- function(r, draster, r_range,
                          treedensity, pastUse, elev, rad,
                          ftreeden, fdist, fclim,

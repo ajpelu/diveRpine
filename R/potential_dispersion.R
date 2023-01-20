@@ -114,6 +114,7 @@
 #' @importFrom methods as
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
+#' @export
 potential_dispersion <- function(x, nf_value, pp_value, rich_nf,
                                  kernel_sbi, kernel_mbi, kernel_ma,
                                  seedlim_int, seedlim_slope) {
@@ -188,6 +189,8 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf,
   nf_edges <- raster::rasterToPolygons(x, fun = function(x) {
     x == nf_value
   }, dissolve = TRUE)
+
+  nf_edges <- as(sf::st_as_sf(nf_edges), "Spatial")
   nf_patches <- sp::disaggregate(nf_edges)
 
   # Operations for each polygon

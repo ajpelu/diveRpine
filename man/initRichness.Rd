@@ -38,6 +38,8 @@ range of Richness).}
 \item{pastUse}{the past land use of the pine plantation (\code{character}).
 One of "Oak", "Shrubland", "Pasture" or "Crop".}
 
+\item{elev, rad}{elevation and annual radiation of the pine plantation}
+
 \item{ftreeden, fdist, fclim}{functions used to computed the effect of tree
 density (\code{ftreeden}), and of the distance to natural forest (\code{fdist}), and of
 the climate-proxy variables (\code{fclim}) on richness values within pine plantation.

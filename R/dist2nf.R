@@ -20,6 +20,7 @@
 #' @import rgeos
 #' @importFrom methods as
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
+#' @export
 
 dist2nf <- function(x, nf_value) {
   if (missing(nf_value)) {

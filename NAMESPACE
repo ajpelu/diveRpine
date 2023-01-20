@@ -2,10 +2,13 @@
 
 export("%>%")
 export(create_landscape)
+export(dist2nf)
+export(initRichness)
 export(input_propagule)
 export(plot_landscape)
 export(plot_propagule)
 export(plot_richness)
+export(potential_dispersion)
 export(run_diveRpine)
 export(summaryRaster)
 import(ggplot2)
