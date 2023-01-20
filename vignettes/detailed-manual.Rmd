@@ -1,0 +1,565 @@
+---
+title: "How diveRpine runs?"
+output: 
+  bookdown::html_document2:
+    base_format: rmarkdown::html_vignette
+    fig_caption: yes
+pkgdown:
+  as_is: true
+bibliography: references-manual.bib
+csl: ecology.csl
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 6,
+  fig.align = "center",
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+
+library(diveRpine)
+library(tidyverse)
+library(raster)
+library(landscapeR)
+library(knitr)
+library(kableExtra)
+library(sf)
+```
+
+
+# Introduction 
+This is a detailed description of the functioning of the app and of the `diveRpine` package. We add some notes to modify and customize the app. This's a live document. 
+
+# Landscape configuration
+The first step is creating a "virtual" landscape with different land-uses. By default 
+`diveRpine` uses four different land-uses: pine plantation, natural forest, 
+cropland and others. To create the virtual landscape, `diveRpine` uses the auxiliary function `create_landscape()`. It generates a raster of 13356 ncell (106 rows and 126 cols (those values ) 
+
+```{r empty, fig.cap="Empty virtual landscape"}
+set.seed(123456)
+empty_landscape <- diveRpine::create_landscape()
+plot(empty_landscape, legend = FALSE, col = "#FFFFe5")
+```
+
+## Target pine-plantation 
+The next step is to configure the target pine-plantation. The user has to specify several features of the target pine-plantation:
+
+- Pine plantation size (`pp_size`)
+- Pine plantation tree density (`pp_den`)
+- Past land use (`pp_use`)
+- Climate-proxy Factors: Elevation (`elev`) and Annual radiation (`rad`)
+
+For instance, a user could select a pine plantation size of 1000 ha (`pp_size`) with a low tree density (< 500 tree/ha). The land use previous to the establishment of the pine plantation was *Natural Forest*. The target pine plantation is located at 1400 *m.a.s.l.* and with an annual radiation of 4.5 GJm^{-2}
+
+```{r false_inputs, echo = TRUE}
+# Here there are some inputs needed for manual rendering (#not run)
+input <- list()
+
+# Select pine size
+pp_size <- 1000
+pp_den <- "low" # c("low", "medium", "high")
+pp_den_den <- 100 # pp_denR()$den
+pp_use <- "Oak" # c("Oak", "Shrublands", "Pasture", "Croplands")
+elev <- 1400
+rad <- 4.5
+
+input$pp_size <- pp_size
+```
+
+The app creates a **pine plantation** patch, with the features selected by the users (Figure \@ref(fig:pine)). 
+
+```{r pine, echo=TRUE, fig.cap="Pine plantation created by the user"}
+# position
+position_pine <- matrix(
+  c(
+    nrow(empty_landscape) / 2,
+    ncol(empty_landscape) / 2
+  ),
+  ncol = 2, nrow = 1
+)
+# Create pine plantation target
+pine <- landscapeR::makePatch(empty_landscape,
+  val = 1, rast = TRUE, bgr = 0,
+  size = input$pp_size,
+  spt = position_pine
+)
+
+plot(pine, legend = FALSE, axes = FALSE, col = c("#FFFFe5", "#a1d99b"))
+```
+
+## Natural forests 
+Then, several **natural forests** patches are created according to user selection. Before, the position of the natural forests are established using the free background space. The position(s) depends on the number of natural forest patch selected by the users. 
+For instance, a user could select 5 natural forest patches with a size range between 100-200 ha. 
+
+```{r, echo = TRUE}
+#### Get the positions for the creation of the NF patches.
+nf_n <- 5
+input$nf_n <- nf_n
+
+#### Get the positions for the creation of the NF patches.
+positions_nf <-
+  sample(
+    which(t(raster::as.matrix(pine) == 0)), nf_n
+  )
+
+
+#### Generate the sizes of the natural forests patch
+nf_size <- c(100, 200)
+input$nf_size <- nf_size
+```
+
+- Then, the user select the range sizes of the natural forests patches 
+
+```{r, echo = TRUE}
+nf_sizes <-
+  round(
+    runif(
+      nf_n,
+      input$nf_size[1],
+      input$nf_size[2]
+    ),
+    digits = 0
+  )
+```
+
+- Natural forest patches are added to the virtual landscape (Figure \@ref(fig:pineOak)). 
+
+```{r pineOak, echo=TRUE, fig.cap="Pine plantation and natural forests patches created by the user"}
+##   pine_oak
+pine_oak <- makeClass(pine,
+  val = 2, rast = TRUE,
+  npatch = nf_n,
+  pts = positions_nf,
+  size = nf_sizes
+)
+plot(pine_oak, legend = FALSE, axes = FALSE, col = c("#FFFFe5", "#a1d99b", "green"))
+```
+
+
+```{r, echo=FALSE}
+#n_crops <- sample(3:8, size = 1)
+n_crops <- 4
+```
+
+```{r landscapeConfigured, echo=TRUE, fig.cap="Landscape configuration"}
+set.seed(123)
+crops_size <-
+  sample(
+    10:ceiling(
+      length(which(t(raster::as.matrix(pine_oak)) == 0)) * 0.05
+    ),
+    size = n_crops
+  )
+
+landscape <-
+  makeClass(pine_oak,
+    val = 3, rast = TRUE,
+    npatch = n_crops,
+    size = crops_size
+  )
+
+plot(landscape,
+  legend = FALSE, axes = FALSE,
+  col = c("#FFFFe5", "#a1d99b", "green", "lightgoldenrod1")
+)
+```
+
+## Crops
+- Now, **crop** patches are added to the virtual landscape resulting with the first configuration of the landscape (Figure \@ref(fig:landscapeConfigured)).  
+
+# Comnpute initial richness 
+
+A richness value is assigned to each pixel. This value will depend on the pixel category (*i.e.* natural forest, pine plantation, etc).
+
+## Pine plantation 
+
+For each pixel $j$, the initial richness value ($R_{init,j}$) is computed following 
+
+$$ Richess \sim Potential\ Richenss \times fc $$ 
+
+where $Potential\ Richenss$ is a random value coming from a range of values obtained from references in our study area [@GomezAparicioetal2009ArePine; @PerezLuqueetal2014SinfonevadaDataset]; and $fc$ is a correction factor which considers: 
+
+$$fc = w_{past}\cdot f(\mathrm{past~Land~Use}) + w_{dist}\cdot f(\mathrm{Seed~source~distance}) + w_{treeden}\cdot f(\mathrm{Tree~density}) + w_{clim}\cdot f(\mathrm{Climate~proxy})$$ 
+We specified the following weights according to literature [@GomezAparicioetal2009ArePine; @NavarroGonzalezetal2013WeightLanduse; @PerezLuqueetal2014SinfonevadaDataset]:
+
+- $w_{past} = 0.2$
+- $w_{dist} = 0.35$
+- $w_{treeden} = 0.25$
+- $w_{clim} = 0.2$
+
+## Tree Density (`ftreeden`)
+
+Richness and species diversity within pine plantation are strongly conditioned by the tree density [@GomezAparicioetal2009ArePine]. Tree Density of the pine plantation has a negative effect on the plant diversity, and on the total plant species richness. An increase on the plantation tree density provokes decreasing of the richness plant values [@GomezAparicioetal2009ArePine]. In our study area, the lower diversity of plant species observed in pine plantations is probably due to the high tree density of pine plantations compared to natural forests, which implies lower light levels under the canopy, and this implies lower diversity of herbaceous species.
+
+In addition, the abundance and richness of disperses birds is negatively affected at high tree densities (especially for jays), reducing the flow of seeds entering into the pine plantations, and thus the potential plant species diversity within them.  
+
+So, potential richness is affected by pine forest density. Thus, according to Eq. 3 of [@GomezAparicioetal2009ArePine], potential richness is affected as a function of density, as follows: 
+
+$$ ftreeden = \exp \left [ -\frac{1}{2} \left( \frac{ treeDensity - 0.22} {1504.1} \right )^2\right ] $$
+
+## Seed source distance (`fdist`)
+
+Seed dispersal depends on the distance from the seed source [@Hewitt2002]. In pine plantations, the presence and abundance of species other than pines is determined, among others, by the distance to the seed source [@GonzalezMorenoetal2011SpatialStructure], although it is not the only reason that explains the diversity observed in pine plantations. 
+
+@GonzalezMorenoetal2011SpatialStructure found that, of the different vegetation types considered in our study are, natural oak forests are the most influential in terms of distance to the seed source. Oak vegetation has higher plant diversity than pine plantations,especially for herbaceous species [@GomezAparicioetal2009ArePine]. Shorter distances could increase the pool of species in the pine plantations and reduce the evenness of plantation communities. 
+
+Specifically, the relationship found between distance to the source and diversity observed in pine plantations is governed by the following equation: 
+
+$$ Diversity = 1.7605 - 0.0932 * \sqrt{\sqrt{Distance}}$$
+
+So, for each pixel of pine plantation the distances between the centroid of the pixel and the edge of each natural forest patches are computed using the function `dist2nf()` (Figure \@ref(fig:distance-raster)). 
+
+```{r, echo=FALSE}
+nf_value <- 2
+```
+
+```{r distance-raster, fig.cap="Distance of natural forests's pixels to pine plantation's pixels", warning=FALSE}
+dist_raster <- dist2nf(landscape)
+
+borde_pine <- rasterToPolygons(landscape,
+  fun = function(x) {
+    x == 1
+  }, dissolve = TRUE
+)
+
+nf_edges <- rasterToPolygons(landscape, fun = function(x) {
+  x == nf_value
+}, dissolve = TRUE)
+
+library("viridis")
+plot(dist_raster, col = magma(25, direction = -1))
+plot(borde_pine, add = TRUE)
+plot(nf_edges, add = TRUE, border = "brown")
+```
+
+Then, we compute the distance effect on the diversity for all the landscape (Figure \@ref(fig:distance-effect)), but we will focus only on pine plantations (Figure \@ref(fig:distance-effectpine)). We can see that pixels close to natural forest patches has higher values of diversity.  
+
+```{r distance-effect, fig.cap="Distance effect on diversity according to Gonzalez-Moreno et al. 2011"}
+### Compute diversity raster (See Gonzalez-Moreno et al. 2011)
+sh <- calc(dist_raster, fun = function(x) {
+  1.7605 - 0.0932 * (sqrt(sqrt(x)))
+})
+plot(sh)
+```
+
+```{r distance-effectpine, fig.cap="Distance effect on diversity for pine plantation according to Gonzalez-Moreno et al. 2011"}
+landscape1 <- landscape
+landscape1[landscape1 == 1] <- -100
+
+s <- calc(stack(landscape1, sh), fun = function(x) ifelse(x[1] == -100, (x[1] / -100) * x[2], NA))
+plot(s)
+```
+
+We scaled the distance effect from 0 to 1 (Figure \@ref(fig:distance-effectpinescaled)). 
+
+```{r distance-effectpinescaled, fig.cap="Distance effect (scaled values) on diversity for pine plantation according to Gonzalez-Moreno et al. 2011."}
+### Scale the distance effect from 0 to 1
+sh_scaled <- (s - cellStats(s, "min")) / (cellStats(s, "max") - cellStats(s, "min"))
+plot(sh_scaled)
+```
+
+
+### Past Land Use 
+
+The past land-use affects to seed banks. In our study area, seedling regeneratio of Quercus species within pine plantation depends on past land-use, distance to seed sources and tree density [@NavarroGonzalezetal2013WeightLanduse; @GomezAparicioetal2009ArePine]. We know that the regeneration of *Quercus* in pine plantations depends more on past land-use than on plantation tree density and distance to the seed source (see table 2 in @NavarroGonzalezetal2013WeightLanduse). To quantify the importance of each of the three variables, we look at the values of variance explained by each of the models for each variable. Subsequently, we rescale the importance of each variable and obtain: 
+
+```{r}
+imp <- read.csv("rescaled_importance_landuse.csv")
+imp %>% 
+  kableExtra::kbl(booktabs = T, 
+                  caption = "Rescaled importance of varaibles. From Navarro-González et al. (2013)", 
+                  escape = FALSE)
+```
+
+
+Therefore, we can say that the regeneration of *Quercus* under pine plantation followed the next rule: 
+
+$$ reg \sim 0.4767 \cdot pastlandUse + 0.3204 \cdot Distance + 0.2029 \cdot Density  $$
+We consider only the past land-use, as tree-density and distance to source are considered in a above hierarchical level. 
+
+But, we need to know the contribution (importance) of the *Quercus* species to the richness found in pine plantations. We use data from SINFONEVADA inventories [@PerezLuque2014]. Of the total richness observed in the SINFONEVADA plots, we analyze how much is due to the contribution of *Quercus* species
+
+
+```{r, eval=FALSE, echo=FALSE}
+### uuid of Sinfonevada
+sinfo_uuid <- 'db6cd9d7-7be5-4cd0-8b3c-fb6dd7446472'
+
+### See metadata
+sinfo_meta <- datasets(uuid = sinfo_uuid)
+
+# Get table of ocurrences
+sf <- occ_data(datasetKey=sinfo_meta$data$key, limit = 8000)
+
+# Get only the fields of interest  
+df <- sf$data %>% dplyr::select(decimalLatitude, decimalLongitude, scientificName)
+write_csv(df, here::here("manual/data/diversity_sinfonevada.csv"))
+```
+
+```{r}
+df <- read.csv("diversity_sinfonevada.csv")
+```
+
+```{r quercusImp, fig.height=2.5, fig.width=4, fig.cap="Percentage of Quercus species by plot in forest inventories of Sierra Nevada (*n* = 600 plots; Pérez-Luque et al. 2014)"}
+
+# How many species by plot
+richness_loc <- df %>%
+  group_by(decimalLatitude, decimalLongitude) %>% 
+  count() %>% 
+  as.data.frame() %>% 
+  tibble::rownames_to_column(var='id_plot') %>%
+  rename(rich = n)
+
+# Get number of quercus species by plot 
+q <- df %>%
+  filter(grepl("Quercus", scientificName)) %>% 
+  group_by(decimalLatitude, decimalLongitude) %>% 
+  count() %>% 
+  as.data.frame() %>% 
+  rename(rich_quercus = n)
+
+# Get total richness by plot 
+richness_tot <- df %>%
+  group_by(decimalLatitude, decimalLongitude) %>% 
+  count() %>% 
+  as.data.frame() %>% 
+  rename(rich_total = n)
+
+per_quercus_plot <- richness_tot %>% 
+  inner_join(q, by=c('decimalLatitude', 'decimalLongitude')) %>% 
+  mutate(per = rich_quercus / rich_total)
+
+per_quercus_plot %>% ggplot(aes(per)) + geom_histogram() +
+  xlab('% Quercus species by plot') + theme_minimal()
+```
+
+```{r, echo=FALSE}
+aux <- per_quercus_plot %>% 
+  summarise(mean = mean(per)*100,
+            min = min(per)*100, 
+            max = max(per)*100, 
+            median = median(per)*100)
+```
+
+*Quercus* contribute (on average) to the richness of the plot about `r round(aux$mean)`  % (Figure \@ref(fig:quercusImp)), therefore, we should adjust the contribution of land use to the richness of the pine forest plots. Thus in the `initRichness()` function the weight of land use in the richness is weighted at 10 %. 
+
+The richness value of a plantation is conditioned by the past land use [@Navarro2013], since the probability of finding recruits of *Quercus* species within a pine plantations depends on the past land use of that plantation. @Navarro2013 differentiate between the probability of finding regeneration in a pine plantation and the amount of regeneration (number of recruits) found within pine plantation. In our case, we are more interested in the probability of finding regeneration, rather than abundance. Thus we have that: 
+
+-  The probability of not finding regeneration within a plantation varies as a function of past land use. For each of the past land uses the zero-inflated model of [@Navarro2013] estimates *odds-ratio*. These values have been rescaled between 0.0001 and 0.9999. We have computed the inverse (1 - x) of the rescaled probability (to convert it into probability of finding regenerated). Thus we have:
+
+```{r}
+odd <- read.csv("odds_ratio_landuse.csv")
+odd %>% 
+  kableExtra::kbl(booktabs = T, 
+                  caption = "Rescaled probability of finding regeneration. From Navarro-González et al. (2013)", 
+                  escape = FALSE)
+```
+
+where, the **rescaled probability of finding regeneration** as a function of land use follows the following gradient: Holm oak forest (0.9999) > Shrubland (0.4982) > Cropland (0.0279) > Grassland (0.0001). 
+
+- The amount of regenerated also depends on past use [@Navarro2013]. In our model, the amount of regeneration does not affect richness, but simply the presence and/or absence of regeneration, so we will use only the rescaled probability of finding regeneration to include past land use. 
+
+Note that all these values are for the same distance and an average density of 750 pines / ha. 
+
+## Natural Forests an Crops 
+
+For natural forests and crop pixels, the initial richness value will be randomly selected from a specific richness range.
+
+- Pixels belong to Natural forest. Initial richness value of each pixel will randomly selected from a specific richness range. This specific range comes from field inventories carry out in our study area [@GomezAparicioetal2009ArePine; @PerezLuque2014]. Range: 13.72 - 16.11 
+
+- Pixels belong to Crops. Initial richness value of each pixel will randomly selected from a specific richness range. This specific range comes references [@Matias2010; @Mendoza2009]  
+Range: 1 - 2
+
+```{r, echo=FALSE}
+ r_range <- as.data.frame(
+      cbind(
+        value = c(0, 1, 2, 3),
+        lowRich = c(0, 12.82, mean(13.72, 15.62), 1),
+        upRich = c(0, 13.34, mean(16.11, 19.66), 2)
+      ))
+```
+
+
+```{r}
+r_range %>% 
+  mutate(patch = case_when(
+    value == 0 ~ "",
+    value == 1 ~ "Pine plantation",
+    value == 2 ~ "Natural Forests",
+    value == 3 ~ "Crops",
+  )) %>%
+  relocate(patch) %>% 
+  kableExtra::kbl(booktabs = T, 
+                  caption = "Richness ranges values", 
+                  escape = FALSE)
+```
+
+## Initial Richness
+The initial Richness is computed using the function `initRichness()`
+
+```{r}
+# landscape() 
+# dist_raster()
+# ri_range (init params )
+# den_pp()$den 
+# pastUse()
+
+rasterRich <- initRichness(r = landscape, 
+                           draster = dist_raster, 
+                           r_range = r_range,
+                           treedensity = pp_den_den, 
+                           pastUse = pp_use, 
+                           elev = 1500, 
+                           rad = 4,
+                           rescale = FALSE)
+```
+
+
+And it can be plotted using `plot_richness()`
+
+
+```{r initialrichness, fig.cap="Initial Richness of the landscape"}
+plot_richness(rasterRich)
+```
+
+## Get values of Richness for NF and Pine
+We used an custom function to compute the mean, min and max. This functions (`summaryRaster`),located in the `init_params.R` file, take a raster and compute the mean, max and min values of the cells. 
+
+We applied this function compute the Richness values of Natural forests patches (Figures \@ref(fig:nfrichness) and \@ref(fig:nfrichnesshist)) and Pine plantation target patch (Figures \@ref(fig:pinerichness) and \@ref(fig:pinerichnesshist)) (init and end configuration). 
+
+### Natural Forests 
+```{r nfrichness, fig.cap="Richness for natural forests"}
+rich_nf <- calc(
+  stack(landscape, rasterRich), 
+  fun=function(x) ifelse(x[1] == nf_value, (x[1]/nf_value)*x[2], NA))
+
+plot(rich_nf, axes=FALSE)
+```
+
+
+```{r, nfrichnesshist, fig.cap="Histogram of richness for natural forests", fig.height=4, fig.width=4}
+dfnf<- drop_na(raster::as.data.frame(rich_nf))
+
+dfnf %>% 
+  ggplot(aes(layer)) + geom_histogram() +
+  theme_minimal() + 
+  ylab("n pixels") + xlab("Richness Value") + 
+  geom_vline(xintercept = mean(dfnf$layer)) +
+  ggtitle("Natural Forests")
+```
+
+The mean, min and max values for natural forests are showed in the value box of the bottom-left part of the app 
+
+### Pine plantation 
+
+```{r pinerichness, fig.cap="Initial Richness for pine plantations"}
+pp_value <- 1 
+rich_pp <- calc(stack(landscape, rasterRich), fun=function(x) ifelse(x[1] == pp_value, x[1]*x[2], NA))
+
+plot(rich_pp, axes=FALSE)
+```
+
+
+```{r, pinerichnesshist, fig.cap="Histogram of initial richness for pine forests", fig.height=4, fig.width=4}
+dfpp<- drop_na(raster::as.data.frame(rich_pp))
+dfpp %>% 
+  ggplot(aes(layer)) + geom_histogram() +
+  theme_minimal() + 
+  ylab("n pixels") + xlab("Richness Value") + 
+  geom_vline(xintercept = mean(dfpp$layer)) +
+  ggtitle("Pine plantation")
+```
+
+The mean, min and max values for the initial pine plantation are showed in the value box of the bottom-left part of the app 
+
+# Dispersal module    
+
+The next step is computed the input of seed propagules from sources (*natural forest*) into target *pine plantation* via *dispersers* [sensu @Nathan2012]. 
+
+The quantity and quality of seed dispersion are influenced by:
+
+  - Seed sources: seed diversity in seed source patch, and patch size
+  - Disperser: percentage of each disperser
+  - Landscape configuration
+
+## Dispersers 
+We have considered three classes of dispersers: 
+
+- **small birds**, *e.g.* European robin (*Erithacus rubecula*); Sardinian warbler (*Sylvia melanocephala*)
+
+- **medium birds**, *e.g.* Eurasian jay (*Garrulus glandarius*)
+
+- **mammals**, *e.g.* Red fox (*Vulpes vulpes*)
+
+For each type of disperser, different *dispersion kernels* have been considered:
+
+- *Small-sized birds* rarely exceed 100 m in distance, and approximately 50% of the seeds are dispersed in the first 50 m [@Jordano2007; @Zamora2010]. 
+
+- *Medium-sized birds* disperse 50% of the seeds over a distance of more than 100 m [@Jordano2007]. The Eurasyan jay shows a dispersion range between 5 and 1000 m for Sierra Nevada mountains (SE Spain)[@Gomez2003]. The distance at which the maximum dispersion occurs depends on the target patch, being approximately 400 me when the target patch is a pine plantation [@Gomez2003 @Pons2007]. 
+
+- *Mammals* disperse in a range from 0 to more than 1500 m, with the dispersion peak at 650 - 700 m. More than 50% of the seeds dispersed by mammals are deposited at distances greater than 495 m [@Jordano2007 @Matias2010]. 
+
+
+
+```{r}
+df_disper <- read.csv("disperser_table.csv")
+
+df_disper %>% 
+  kableExtra::kbl(booktabs = T, 
+                  caption = "Features of the dispersers", 
+                  escape = TRUE)
+```
+
+
+
+```{r}
+# Create vectors of dispersl kernels 
+vector_sb <- seq(0, 500, by = 1)
+kernel_sb <- dlnorm(vector_sb, meanlog = log(51), sdlog = .7)
+vector_mb <- seq(0, 1000, by = 1)
+kernel_mb <- dlnorm(vector_mb, meanlog = log(201), sdlog = .7)
+vector_ma <- seq(0, 2000, by = 1)
+kernel_ma <- ifelse(vector_ma <= 400, 
+                    dweibull(vector_ma, shape = 1.385, scale = 137),
+             dlnorm(vector_ma, meanlog = 6.621, sdlog = 0.297))
+
+dfsb <- 
+  data.frame(cbind(kernel=kernel_sb, dist= vector_sb)) %>% 
+  mutate(type = "small birds")
+dfmb <- 
+  data.frame(cbind(kernel=kernel_mb, dist= vector_mb)) %>% 
+  mutate(type = "medium birds")
+dfma <- 
+  data.frame(cbind(kernel=kernel_ma, dist= vector_ma)) %>% 
+  mutate(type = "mammals")
+
+df <- bind_rows(dfsb, dfmb, dfma)
+
+ggplot(df, aes(x=dist, y=kernel, fill=type)) + 
+  geom_polygon(alpha=.5) + xlim(0,1500) +
+  theme_bw()+ 
+  xlab("Distance from Seed source") +
+  ylab("Probability of dispersion") +
+  scale_fill_manual(
+    values=c("#493738","#A05A2C","#FFDD56" )) +
+  theme(
+    panel.grid = element_blank()
+  ) 
+```
+
+
+##### 
+
+- Identify nf and get limit of the nf 
+- Compute the minimum distance between a nf patch and tha pp 
+
+
+
+# References 

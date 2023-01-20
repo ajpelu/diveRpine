@@ -1,0 +1,6 @@
+dispersers,dispersion_range,peak_distance, distance_50pct,references
+Small birds,0 - 100,,< 51,@Jordanoetal2007DifferentialContribution; @Zamoraetal2010PositiveAdjacency
+Medium birds,,,> 110,@Jordanoetal2007DifferentialContribution
+Eurasian jay,5 - 1000,263*; 402**,,@Gomez2003SpatialPatterns
+,3 - 550,68,,@PonsPausas2007AcornDispersal
+Mammals,0 - 990,650 - 700,> 495,@Jordanoetal2007DifferentialContribution: @Matiasetal2010SeedDispersal
