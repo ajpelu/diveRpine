@@ -36,3 +36,6 @@ articles:
   contents:
   - supp-references
   - packages-used
+
+pkgdown:
+  as_is: true

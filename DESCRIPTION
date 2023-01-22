@@ -33,6 +33,7 @@ Imports:
     magrittr,
     landscapeR
 Suggests: 
+    bookdown,
     pkgdown,
     spelling,
     rmarkdown
