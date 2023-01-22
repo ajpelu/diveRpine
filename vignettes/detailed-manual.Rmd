@@ -2,7 +2,7 @@
 title: "How diveRpine runs?. Detailed manual"
 output: 
   bookdown::html_document2:
-    base_format: rmarkdown::html_document
+    base_format: rmarkdown::html_vignette
     fig_caption: yes
     number_sections: FALSE 
 pkgdown:
