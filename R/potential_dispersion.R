@@ -34,6 +34,7 @@
 #'   \item Disperses: percentage of each disperser type
 #'   \item Landscape configuration
 #' }
+#'
 #' \itemize{Three classes of disperses were considered by default for the study
 #' area:
 #'   \item small birds, *e.g.* European robin (*Erithacus rubecula*),
@@ -91,7 +92,7 @@
 #' is computed using the `seedlim_int` and `seedlim_slope` parameters;
 #' \eqn{\textrm{seed Entry}_{0}} and \eqn{\textrm{seed Entry}_{100}} correspond
 #' to the seed entry for no adjacency and full adjacency respectively (see
-#' Zamora et al. 2010):
+#' Zamora et al. 2010).
 #'
 #' @references
 #' \insertRef{Gomez2003}{diveRpine}
