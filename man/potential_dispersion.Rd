@@ -45,23 +45,26 @@ three classes of disperses and different kernels equations.
 }
 \details{
 It computes the propagule input from each patch to focal pine plantation
-using three classes of disperses and different kernels.
-\itemize{The quantity and quality of seed dispersion are influenced by:
+using three classes of disperses and different kernels. The quantity and
+quality of seed dispersion are influenced by:
+\itemize{
 \item Seed sources: seed diversity in seed source patch, and patch size
 \item Disperses: percentage of each disperser type
 \item Landscape configuration
 }
 
-\itemize{Three classes of disperses were considered by default for the study
+Three classes of disperses were considered by default for the study
 area:
-\item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}),
-Sardinian warbler (\emph{Sylvia melanocephala})
+\itemize{
+\item small birds, \emph{e.g.} European robin (\emph{Erithacus rubecula}), Sardinian warbler
+(\emph{Sylvia melanocephala})
 \item medium birds, \emph{e.g.} Eurasian jay (\emph{Garrulus glandarius})
 \item mammals, \emph{e.g.} Red fox (\emph{Vulpes vulpes})
 }
 
-\itemize{For each type of disperser, different dispersion kernels have been
+For each type of disperser, different dispersion kernels have been
 considered:
+\itemize{
 \item Small-sized birds rarely exceed 100 m in distance, and approximately
 50\% of the seeds are dispersed in the first 50 m.
 \item Medium-sized birds disperse 50\% of the seeds over a distance of more

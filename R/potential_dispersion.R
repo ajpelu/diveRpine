@@ -28,34 +28,40 @@
 #' @details
 #'
 #' It computes the propagule input from each patch to focal pine plantation
-#' using three classes of disperses and different kernels.
-#' \itemize{The quantity and quality of seed dispersion are influenced by:
-#'   \item Seed sources: seed diversity in seed source patch, and patch size
-#'   \item Disperses: percentage of each disperser type
-#'   \item Landscape configuration
-#' }
+#' using three classes of disperses and different kernels. The quantity and
+#' quality of seed dispersion are influenced by:
 #'
-#' \itemize{Three classes of disperses were considered by default for the study
+#' - Seed sources: seed diversity in seed source patch, and patch size
+#'
+#' - Disperses: percentage of each disperser type
+#'
+#' - Landscape configuration
+#'
+#' Three classes of disperses were considered by default for the study
 #' area:
-#'   \item small birds, *e.g.* European robin (*Erithacus rubecula*),
-#'   Sardinian warbler (*Sylvia melanocephala*)
-#'   \item medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
-#'   \item mammals, *e.g.* Red fox (*Vulpes vulpes*)
-#' }
 #'
-#' \itemize{For each type of disperser, different dispersion kernels have been
+#' - small birds, *e.g.* European robin (*Erithacus rubecula*), Sardinian warbler
+#' (*Sylvia melanocephala*)
+#'
+#' - medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
+#'
+#' - mammals, *e.g.* Red fox (*Vulpes vulpes*)
+#'
+#' For each type of disperser, different dispersion kernels have been
 #' considered:
-#'   \item Small-sized birds rarely exceed 100 m in distance, and approximately
+#'
+#' - Small-sized birds rarely exceed 100 m in distance, and approximately
 #'   50% of the seeds are dispersed in the first 50 m.
-#'   \item Medium-sized birds disperse 50% of the seeds over a distance of more
+#'
+#' - Medium-sized birds disperse 50% of the seeds over a distance of more
 #'   than 100 m. The Eurasyan jay shows a dispersion range between 5 and 1000 m
 #'   for Sierra Nevada mountains (SE Spain). The distance at which the maximum
 #'   dispersion occurs depends on the target patch, being approximately 400 m
 #'   when the target patch is a pine plantation.
-#'   \item Mammals disperse in a range from 0 to more than 1500 m, with
+#'
+#' - Mammals disperse in a range from 0 to more than 1500 m, with
 #'   the dispersion peak at 650 - 700 m. More than 50% of the seeds
 #'   dispersed by mammals are deposited at distances greater than 495 m.
-#' }
 #'
 #' According to the disperser type, the function uses by default different
 #' dispersion kernels. For small and medium birds a log-normal dispersion kernels

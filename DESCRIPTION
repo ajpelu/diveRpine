@@ -37,6 +37,9 @@ Suggests:
     tidyverse,
     pkgdown,
     spelling,
+    sf,
+    viridis,
+    kableExtra,
     rmarkdown
 RdMacros: Rdpack
 URL: https://ajpelu.github.io/diveRpine,

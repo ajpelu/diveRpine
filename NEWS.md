@@ -19,6 +19,8 @@
 
 * A new module has been implemented in the app to incorporate the climate-proxy functions, using the equation from [Gómez-Aparicio et al. (2009)](https://doi.org/10.1890/08-1656.1)
 
+* Several vignettes are added containing detailed manual of how diveRpine runs.
+
 
 ## Minor improvements and bug fixes
 * fix minor typo on code comments of the functions

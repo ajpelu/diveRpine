@@ -25,6 +25,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+options(rmarkdown.html_vignette.check_title = FALSE)
 set.seed(123)
 ```
 
