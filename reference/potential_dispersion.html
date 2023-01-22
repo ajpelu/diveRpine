@@ -23,12 +23,8 @@ three classes of disperses and different kernels equations."><meta property="og:
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/packages-used.html">Packages Used</a>
-    <a class="dropdown-item" href="../articles/supp-references.html">Supporting references</a>
-  </div>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -116,14 +112,17 @@ type of disperser</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>It computes the propagule input from each patch to focal pine plantation
-using three classes of disperses and different kernels.</p><ul><li><p>Seed sources: seed diversity in seed source patch, and patch size</p></li>
+using three classes of disperses and different kernels. The quantity and
+quality of seed dispersion are influenced by:</p><ul><li><p>Seed sources: seed diversity in seed source patch, and patch size</p></li>
 <li><p>Disperses: percentage of each disperser type</p></li>
 <li><p>Landscape configuration</p></li>
-</ul><ul><li><p>small birds, <em>e.g.</em> European robin (<em>Erithacus rubecula</em>),
-Sardinian warbler (<em>Sylvia melanocephala</em>)</p></li>
+</ul><p>Three classes of disperses were considered by default for the study
+area:</p><ul><li><p>small birds, <em>e.g.</em> European robin (<em>Erithacus rubecula</em>), Sardinian warbler
+(<em>Sylvia melanocephala</em>)</p></li>
 <li><p>medium birds, <em>e.g.</em> Eurasian jay (<em>Garrulus glandarius</em>)</p></li>
 <li><p>mammals, <em>e.g.</em> Red fox (<em>Vulpes vulpes</em>)</p></li>
-</ul><ul><li><p>Small-sized birds rarely exceed 100 m in distance, and approximately
+</ul><p>For each type of disperser, different dispersion kernels have been
+considered:</p><ul><li><p>Small-sized birds rarely exceed 100 m in distance, and approximately
 50% of the seeds are dispersed in the first 50 m.</p></li>
 <li><p>Medium-sized birds disperse 50% of the seeds over a distance of more
 than 100 m. The Eurasyan jay shows a dispersion range between 5 and 1000 m
@@ -164,7 +163,7 @@ Zamora et al. 2010), that is computed as follows:</p>
 is computed using the <code>seedlim_int</code> and <code>seedlim_slope</code> parameters;
 \(\textrm{seed Entry}_{0}\) and \(\textrm{seed Entry}_{100}\) correspond
 to the seed entry for no adjacency and full adjacency respectively (see
-Zamora et al. 2010):</p>
+Zamora et al. 2010).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
