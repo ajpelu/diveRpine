@@ -590,7 +590,7 @@ For each of the natural forest patches, the distance to the target pine plantati
 x <- landscape
 # Get polygons of Natural forests 
 nf_edges <- raster::rasterToPolygons(x, fun=function(x){x == nf_value}, dissolve = TRUE)
-nf_patches <- sp::disaggregate(nf_edges)
+nf_patches <- sp::disaggregate(as(st_as_sf(nf_edges), "Spatial"))
 
 i <- 2
 # distance between nf polygong i and cells of the raster 
