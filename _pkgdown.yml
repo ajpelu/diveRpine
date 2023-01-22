@@ -24,3 +24,15 @@ reference:
   - plot_propagule
   - plot_richness
   - summaryRaster
+
+articles:
+- title: Getting started
+  contents:
+  - getting-started
+- title: Manual
+  contents:
+  - detailed-manual
+- title: References
+  contents:
+  - supp-references
+  - packages-used
