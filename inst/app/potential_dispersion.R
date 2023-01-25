@@ -28,33 +28,40 @@
 #' @details
 #'
 #' It computes the propagule input from each patch to focal pine plantation
-#' using three classes of disperses and different kernels.
-#' \itemize{The quantity and quality of seed dispersion are influenced by:
-#'   \item Seed sources: seed diversity in seed source patch, and patch size
-#'   \item Disperses: percentage of each disperser type
-#'   \item Landscape configuration
-#' }
-#' \itemize{Three classes of disperses were considered by default for the study
-#' area:
-#'   \item small birds, *e.g.* European robin (*Erithacus rubecula*),
-#'   Sardinian warbler (*Sylvia melanocephala*)
-#'   \item medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
-#'   \item mammals, *e.g.* Red fox (*Vulpes vulpes*)
-#' }
+#' using three classes of disperses and different kernels. The quantity and
+#' quality of seed dispersion are influenced by:
 #'
-#' \itemize{For each type of disperser, different dispersion kernels have been
+#' - Seed sources: seed diversity in seed source patch, and patch size
+#'
+#' - Disperses: percentage of each disperser type
+#'
+#' - Landscape configuration
+#'
+#' Three classes of disperses were considered by default for the study
+#' area:
+#'
+#' - small birds, *e.g.* European robin (*Erithacus rubecula*), Sardinian warbler
+#' (*Sylvia melanocephala*)
+#'
+#' - medium birds, *e.g.* Eurasian jay (*Garrulus glandarius*)
+#'
+#' - mammals, *e.g.* Red fox (*Vulpes vulpes*)
+#'
+#' For each type of disperser, different dispersion kernels have been
 #' considered:
-#'   \item Small-sized birds rarely exceed 100 m in distance, and approximately
+#'
+#' - Small-sized birds rarely exceed 100 m in distance, and approximately
 #'   50% of the seeds are dispersed in the first 50 m.
-#'   \item Medium-sized birds disperse 50% of the seeds over a distance of more
+#'
+#' - Medium-sized birds disperse 50% of the seeds over a distance of more
 #'   than 100 m. The Eurasyan jay shows a dispersion range between 5 and 1000 m
 #'   for Sierra Nevada mountains (SE Spain). The distance at which the maximum
 #'   dispersion occurs depends on the target patch, being approximately 400 m
 #'   when the target patch is a pine plantation.
-#'   \item Mammals disperse in a range from 0 to more than 1500 m, with
+#'
+#' - Mammals disperse in a range from 0 to more than 1500 m, with
 #'   the dispersion peak at 650 - 700 m. More than 50% of the seeds
 #'   dispersed by mammals are deposited at distances greater than 495 m.
-#' }
 #'
 #' According to the disperser type, the function uses by default different
 #' dispersion kernels. For small and medium birds a log-normal dispersion kernels
@@ -84,14 +91,14 @@
 #' potential dispersion by birds increases according a correction factor (see
 #' Zamora et al. 2010), that is computed as follows:
 #'
-#' \eqn{adj_{fc} = 1 + \frac{\textup{seed Entry} - \textup{seed Entry}_{0}}{\textup{seed Entry}_{100} - \textup{seed Entry}_{0}}}
+#' \eqn{adj_{fc} = 1 + \frac{\textrm{seed Entry} - \textrm{seed Entry}_{0}}{\textrm{seed Entry}_{100} - \textrm{seed Entry}_{0}}}
 #'
 #'
-#' where \eqn{\textup{seed Entry} = 1- \textup{seed limitation}}; \textup{seed limitation}
+#' where \eqn{\textrm{seed Entry} = 1- \textrm{seed limitation}}; \eqn{\textrm{seed limitation}}
 #' is computed using the `seedlim_int` and `seedlim_slope` parameters;
-#' \eqn{\textup{seed Entry}_{0}} and \eqn{\textup{seed Entry}_{100}} correspond
+#' \eqn{\textrm{seed Entry}_{0}} and \eqn{\textrm{seed Entry}_{100}} correspond
 #' to the seed entry for no adjacency and full adjacency respectively (see
-#' Zamora et al. 2010):
+#' Zamora et al. 2010).
 #'
 #' @references
 #' \insertRef{Gomez2003}{diveRpine}
@@ -114,6 +121,7 @@
 #' @importFrom methods as
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
+#' @export
 potential_dispersion <- function(x, nf_value, pp_value, rich_nf,
                                  kernel_sbi, kernel_mbi, kernel_ma,
                                  seedlim_int, seedlim_slope) {
@@ -188,6 +196,8 @@ potential_dispersion <- function(x, nf_value, pp_value, rich_nf,
   nf_edges <- raster::rasterToPolygons(x, fun = function(x) {
     x == nf_value
   }, dissolve = TRUE)
+
+  nf_edges <- as(sf::st_as_sf(nf_edges), "Spatial")
   nf_patches <- sp::disaggregate(nf_edges)
 
   # Operations for each polygon

@@ -185,5 +185,5 @@ body <- dashboardBody(
 )
 
 dashboardPage(header, sidebar, body,
-              title = "diveRpine v1.1.0",
+              title = "diveRpine v1.2.0",
               skin = "green")

@@ -7,23 +7,27 @@
 #' @param draster A `raster` object with values of the distance from the
 #' target patch to natural forest patches.
 #'
-#' @param ftreeden,fdist functions used to computed the effect of tree
-#' density (`ftreeden`), and of the distance to natural forest (`fdist`)
-#' on richness values within pine plantation. See details.
+#' @param ftreeden,fdist,fclim functions used to computed the effect of tree
+#' density (`ftreeden`), and of the distance to natural forest (`fdist`), and of
+#' the climate-proxy variables (`fclim`) on richness values within pine plantation.
+#' See details.
 #'
-#' @param w_dist,w_treeden,w_past weights applied to the functions that
+#' @param w_dist,w_treeden,w_past,w_clim weights applied to the functions that
 #' correct the plant richness values according to the distance to seed source,
-#' the tree density, and the past-land use of the pine plantation.
+#' the tree density, the past-land use of the pine plantation, and also the
+#' climate-proxy variables of the pine plantation.
 #'
 #' @param r_range A `data frame` with three columns: `value` of land use
 #' (`integer`: 0 = "Other", 1 = "Pine plantation", 2 = "Natural Forests",
 #' 3 = "Crop"); `lowRich` and `upRich` (lower and upper value of the
-#' range of Richness)\insertCite{@see @GomezAparicio2009}{diveRpine}.
+#' range of Richness).
 #'
 #' @param treedensity density of the pine plantation (`integer`)
 #'
 #' @param pastUse the past land use of the pine plantation (`character`).
 #' One of "Oak", "Shrubland", "Pasture" or "Crop".
+#'
+#' @param elev,rad elevation and annual radiation of the pine plantation
 #'
 #' @param rescale If "TRUE" the results are rescaled (0 = min and 1 = max)
 #'
@@ -34,35 +38,100 @@
 #' categories (*e.g.* target pine-plantation, surrounding natural
 #' forests, shrubland and crops). For each land-use category, the richness value
 #' of the pixels in each of the patches is randomly calculated from a range
-#' of potential richness values specified by `r_range`.
+#' of potential richness values specified by `r_range`. In diveRpine, richness
+#' value for each of the patch classes are calculated considering the range
+#' of possible values found on the study area (Sierra Nevada, southern Spain).
+#' Specifically:
+#' | value| lowRich| upRich|
+#' |-----:|-------:|------:|
+#' |     No Data |    0.00|   0.00|
+#' |     Pine Plantations |   12.82|  13.34|
+#' |     Natural Forests |   13.72|  16.11|
+#' |     Crops |    1.00|   2.00|
 #'
-#' The range of plant richness values is specified by
-#' `r_range`. In the diveRpine app, those values are calculated considering
-#' the range of possible values found on the study area. I
+#' A richness value is assigned to each pixel. This value will depend on the
+#' pixel category.
 #'
-#'
-#'
-#'
-#' Richness value for each of the patch classes (*i.e.* pine plantation,
-#' natural forests, shrubland and crops) are calculated considering the range
-#' of possible values found on the study area. In this case we use data from
-#' Sierra Nevada (southern Spain)
-#'
+#' ## Pine plantation
 #' The richness values of each pixel of the focal (target) pine
 #' patch depends on:
 #' \itemize{
-#'   \item Stand structure: tree density, patch size, past land-use
+#'   \item Stand Features: tree density, patch size, past land-use, climate-proxy variables
 #'   \item Distance to seed source (landscape configuration)
 #' }
+#' For each pixel *j*, the initial richness value (\eqn{R_{init,j}}) is computed
+#' as \deqn{Richess \sim Potential\ Richenss \times fc}
+#' where *Potential Richenss* is a random value coming from `r_range` and *fc*
+#' is a correction factor:
+#' \deqn{fc = w_{past}\cdot f(\textrm{past~Land~Use}) + w_{dist}\cdot f(\textrm{Seed~source~distance}) + w_{treeden}\cdot f(\textrm{Tree~density}) + w_{clim}\cdot f(\textrm{Climate~proxy})}
 #'
+#' We specified the following weights according to literature (see references):
+#
+#' - \eqn{w_{past}} = 0.2
+#' - \eqn{w_{dist}} = 0.35
+#' - \eqn{w_{treeden}} = 0.25
+#' - \eqn{w_{clim}} = 0.2
 #'
+#' but different weights can be provided using `w_past`, `w_dist`,`w_treeden`,
+#' and `w_clim` respectively.
 #'
+#' Each of the factors affecting the richness within a pine plantation pixel are
+#' computed as follows:
 #'
+#' ### Tree density (`ftreeden`)
+#' Richness and species diversity within pine plantation are strongly conditioned
+#' by tree density, which has a negative effect on the plant diversity, and on
+#' the total plant species richness. Potential richness is affected as a function
+#' of density, as follows:
+#' \deqn{\textrm{ftreeden} = \exp \left(-\frac{1}{2} \left( \frac{ \textrm{treeDensity} - 0.22} {1504.1}\right )^2\right )}
 #'
-#' Richenss value for each of the patch classes (*i.e.* pine plantation,
-#' natural forests, shrubland and crops) are calculated considering the range
-#' of possible values found on the study area. In this case we use data from
-#' Sierra Nevada (southern Spain) See References.
+#' This equation is the used by default, but could be change with `ftreeden`. Tree
+#' density value is specified by `treedensity`.
+#'
+#' ### Climate-proxy factors
+#' Potential richness are also strongly affected by climate-proxy variables.
+#' It has been determined from 19 climatic and topographical variables
+#' that the elevation and the annual radiation are the variables that best
+#' explaining the variability of potential richness within pine-plantation
+#' (they capturing more than 83.3 % of the observed variance). The climate effect
+#' on potential richness within pine-plantation has been modeled according to the
+#' following equation:
+#' \deqn{\textrm{fclim}=\textrm{exp}\left (-\frac{1}{2}\left ( \frac{\textrm{Altitude}- 1557.16}{644.89} \right )^{2}  \right ) \times ~\textrm{exp}\left (-\frac{1}{2}\left ( \frac{\textrm{Radiation}}{13.24} \right )^{2}  \right )}
+#'
+#' This equation is the used by default, but could be change with `fclim`. Altitude
+#' and radiation values are specified by `elev` and `rad`.
+#'
+#' ### Seed source distance (`fdist`).
+#' Seed dispersal depends on the distance from the seed source. In pine plantations,
+#' the presence and abundance of species other than pines is determined, among
+#' others, by the distance to the seed source. In Sierra Nevada (southern Spain)
+#' natural oak forests are the most influential in terms of distance to the seed
+#' source. Oak vegetation has higher plant diversity than pine plantations,
+#' especially for herbaceous species. Shorter distances could increase the pool
+#' of species in the pine plantations and reduce the evenness of plantation
+#' communities. The relationship found between distance to the source and diversity
+#' observed in pine plantations is governed by the following equation:
+#' \deqn{\textrm{Diversity} = 1.7605 - 0.0932 * \sqrt{\sqrt{\textrm{Distance}}}}
+#'
+#' This equation is the used by default, but could be change with `fdist`. For
+#' each pixel of pine plantation the distances between the centroid of the pixel
+#' and the edge of each natural forest patches are computed using the function
+#' [diveRpine::dist2nf()] which generate a distance raster (`draster`).
+#'
+#' ### Past Land Use
+#' The richness value of a plantation is conditioned by the past land use. For
+#' instance, it has been found that regeneration of *Quercus* in pine
+#' plantations depends more on past land-use than on plantation tree density and
+#' distance to the seed source. Navarro-González et al. (2013), found that the
+#' probability finding regeneration within a plantation varies as a function of
+#' past land use. We rescaled the gradient found by Navarro-González et al. (2013)
+#' as follow:  natural forest (0.9999), Shrubland (0.4982), Cropland (0.0279),
+#' and Grassland (0.0001). The value of \eqn{f(\textrm{past Land Use})} is selected
+#' according to the past land use specified in `pastUse`.
+#'
+#' ## Natural forests and Croplands
+#' The initial richness values of each pixel of natural forest and cropland patches are
+#' randomly selected from the value ranges specified on `r_range`.
 #'
 #' @references
 #' \insertRef{GomezAparicio2009}{diveRpine}
@@ -79,7 +148,7 @@
 #' @importFrom stats runif
 #' @importFrom Rdpack reprompt
 #' @author Antonio J Pérez-Luque (\email{ajpelu@@gmail.com})
-
+#' @export
 initRichness <- function(r, draster, r_range,
                          treedensity, pastUse, elev, rad,
                          ftreeden, fdist, fclim,
